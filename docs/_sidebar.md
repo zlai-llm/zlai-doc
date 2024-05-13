@@ -1,0 +1,25 @@
+- [首页]()
+----
+- [zlai](doc/zlai.md)
+- [llm-线上大模型](doc/zlai-llm-01.md)
+- [llm-大模型调用的便捷方法](doc/zlai-llm-02.md)
+- [llm-本地大模型](doc/zlai-llm-03.md)
+- [llm-大模型参数理论解析](doc/zlai-llm-04.md)
+- [message-消息机制](doc/zlai-message-01.md)
+- [prompt-大模型的局限性](doc/zlai-prompt-01.md)
+- [prompt-提示词设计一般思路](doc/zlai-prompt-02.md)
+- [prompt-大模型参数的设定](doc/zlai-prompt-03.md)
+- [prompt-大模型Prompt的最佳实践](doc/zlai-prompt-04.md)
+- [prompt-大模型Prompt的最佳实践](doc/zlai-prompt-03.md)
+- [embedding](doc/zlai-embedding.md)
+- [document](doc/zlai-document.md)
+- [elasticsearch](doc/zlai-elasticsearch.md)
+- [agent](doc/zlai-agent.md)
+- [agent-tasks-sequence](doc/zlai-agent-tasks-sequence.md)
+
+----
+- [适用于LLM开发的基础Python](doc/01-适用于LLM开发的基础Python.md)
+- [搭建CUDA深度学习环境](doc/cuda.md)
+- 大模型Prompt工程（总结开发中）
+----
+

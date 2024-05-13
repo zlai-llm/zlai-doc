@@ -11,17 +11,28 @@
   * [大模型的局限性](prompt/zlai-prompt-01.md)
   * [提示词设计一般思路](prompt/zlai-prompt-02.md)
   * [大模型参数的设定](prompt/zlai-prompt-03.md)
-  * [大模型Prompt的最佳实践](prompt/zlai-prompt-04.md)
-  * [大模型Prompt的最佳实践](prompt/zlai-prompt-03.md)
+  * [Few-shot提示](prompt/zlai-prompt-04.md)
+  * [事实知识提示](prompt/zlai-prompt-05.md)
+  * [思维链](prompt/zlai-prompt-06.md)
+  * [自我一致性](prompt/zlai-prompt-07.md)
+  * [检索增强生成](prompt/zlai-prompt-08.md)
+* **Prompt-提示词应用**
+  * [提示词应用](prompt-apply/zlai-prompt-apply-01.md)
+  * [生成数据](prompt-apply/zlai-prompt-apply-02.md)
+  * [文本分类](prompt-apply/zlai-prompt-apply-03.md)
+  * [结构化数据解析](prompt-apply/zlai-prompt-apply-04.md)
+  * [总结文本摘要](prompt-apply/zlai-prompt-apply-06.md)
+  * [代码生成](prompt-apply/zlai-prompt-apply-07.md)
+  * [对话](prompt-apply/zlai-prompt-apply-08.md)
 * **Embedding**
   * [embedding](embedding/zlai-embedding.md)
-
-
-- [document](doc/zlai-document.md)
-- [elasticsearch](doc/zlai-elasticsearch.md)
-- [agent](doc/zlai-agent.md)
-- [agent-tasks-sequence](doc/zlai-agent-tasks-sequence.md)
-
-----
-- [适用于LLM开发的基础Python](doc/01-适用于LLM开发的基础Python.md)
-
+  * [elasticsearch](embedding/zlai-elasticsearch.md)
+* **RAG**
+  * [RAG](rag/zlai-rag-01.md)
+* **Agent**
+  * [Agent](agent/zlai-agent-01.md)
+  * [agent](agent/zlai-agent.md)
+  * [agent-tasks-sequence](agent/zlai-agent-tasks-sequence.md)
+* **Parse**
+  * [document](parse/zlai-document.md)
+  * [parse](parse/zlai-parse-01.md)

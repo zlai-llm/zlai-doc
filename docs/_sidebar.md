@@ -27,6 +27,7 @@
 * **Embedding**
   * [embedding](embedding/zlai-embedding.md)
   * [elasticsearch](embedding/zlai-elasticsearch.md)
+  * [milvus](embedding/milvus.md)
 * **RAG**
   * [RAG](rag/zlai-rag-01.md)
 * **Agent**

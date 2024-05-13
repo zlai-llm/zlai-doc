@@ -1,7 +1,11 @@
 <img src='img/llm-icon.png' width='100px'>
 
-> 大模学习型文档
+# zlai-llm <small>0.1</small>
 
-[首页]()
+> 简单易学的大模型学习手册
 
-![color](#f0f0f0)
+- 丰富的RAG与Agent工具链路
+- 面向实践的大模型学习指南
+
+[Get Started](#zlai)
+[GitHub](https://github.com/zlai-llm/zlai-doc.git)

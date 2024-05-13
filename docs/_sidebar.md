@@ -1,17 +1,22 @@
 - [首页]()
-----
-- [zlai](doc/zlai.md)
-- [llm-线上大模型](doc/zlai-llm-01.md)
-- [llm-大模型调用的便捷方法](doc/zlai-llm-02.md)
-- [llm-本地大模型](doc/zlai-llm-03.md)
-- [llm-大模型参数理论解析](doc/zlai-llm-04.md)
-- [message-消息机制](doc/zlai-message-01.md)
-- [prompt-大模型的局限性](doc/zlai-prompt-01.md)
-- [prompt-提示词设计一般思路](doc/zlai-prompt-02.md)
-- [prompt-大模型参数的设定](doc/zlai-prompt-03.md)
-- [prompt-大模型Prompt的最佳实践](doc/zlai-prompt-04.md)
-- [prompt-大模型Prompt的最佳实践](doc/zlai-prompt-03.md)
-- [embedding](doc/zlai-embedding.md)
+
+* **LLM**
+  * [线上大模型](llm/zlai-llm-01.md)
+  * [大模型调用的便捷方法](llm/zlai-llm-02.md)
+  * [本地大模型](llm/zlai-llm-03.md)
+  * [大模型参数理论解析](llm/zlai-llm-04.md)
+* **Message**
+  * [message-消息机制](message/zlai-message-01.md)
+* **Prompt**
+  * [大模型的局限性](prompt/zlai-prompt-01.md)
+  * [提示词设计一般思路](prompt/zlai-prompt-02.md)
+  * [大模型参数的设定](prompt/zlai-prompt-03.md)
+  * [大模型Prompt的最佳实践](prompt/zlai-prompt-04.md)
+  * [大模型Prompt的最佳实践](prompt/zlai-prompt-03.md)
+* **Embedding**
+  * [embedding](embedding/zlai-embedding.md)
+
+
 - [document](doc/zlai-document.md)
 - [elasticsearch](doc/zlai-elasticsearch.md)
 - [agent](doc/zlai-agent.md)
@@ -19,7 +24,4 @@
 
 ----
 - [适用于LLM开发的基础Python](doc/01-适用于LLM开发的基础Python.md)
-- [搭建CUDA深度学习环境](doc/cuda.md)
-- 大模型Prompt工程（总结开发中）
-----
 

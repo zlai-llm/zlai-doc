@@ -25,7 +25,7 @@
   * [代码生成](prompt-apply/zlai-prompt-apply-07.md)
   * [对话](prompt-apply/zlai-prompt-apply-08.md)
 * **Embedding**
-  * [embedding](embedding/zlai-embedding.md)
+  * [embedding](embedding/zlai-embedding-02)
   * [elasticsearch](embedding/zlai-elasticsearch.md)
   * [milvus](embedding/milvus.md)
 * **RAG**

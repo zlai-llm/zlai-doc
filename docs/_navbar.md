@@ -25,7 +25,9 @@
   * [代码生成](prompt-apply/zlai-prompt-apply-07.md)
   * [对话](prompt-apply/zlai-prompt-apply-08.md)
 * **Embedding**
-  * [embedding](embedding/zlai-embedding-02)
+  * [文本的数字化表示](embedding/zlai-embedding-01.md)
+  * [向量化在大模型中的应用](embedding/zlai-embedding-02.md)
+  * [向量数据库简介](embedding/zlai-embedding-03.md)
   * [elasticsearch](embedding/zlai-elasticsearch.md)
   * [milvus](embedding/milvus.md)
 * **RAG**

@@ -1,132 +1,59 @@
-# ElasticSearch
+# ElasticSearch与文本增强检索RAG
 
-## 1. 获取ES链接
+Retrieval-Augmented Generation (RAG) 是一种结合检索和生成技术的模型架构，旨在增强文本生成任务中的信息获取能力。RAG 通过检索相关文档并将其作为生成模型的输入，生成更加丰富和准确的回答。该方法特别适用于知识密集型任务，例如问答系统、对话系统和信息摘要。
 
-> 获取ES全局链接：`get_es_global_con`
+### RAG 的核心概念
 
-**全局链接在整个代码区间内都可以使用。**
+1. **检索模块（Retriever）**：
+   - **任务**：从大型文档库中检索与输入查询相关的文档。
+   - **技术**：通常使用向量数据库（如 Faiss）或基于BM25的传统检索方法。检索模块将查询和文档编码为向量，通过相似度计算找到最相关的文档。
 
-```python
-from zlai.elasticsearch import *
+2. **生成模块（Generator）**：
+   - **任务**：根据输入查询和检索到的文档生成最终的回答。
+   - **技术**：使用预训练的生成模型（如 GPT-3、T5）来生成自然语言文本。生成模块会将检索到的文档与查询一起输入到模型中，生成回答。
 
-hosts = ESUrl.url
-get_es_global_con(hosts=hosts)
-```
+### RAG 的工作流程
 
-> 获取ES链接：`get_es_con`
+1. **查询输入**：用户输入一个查询。
+2. **文档检索**：检索模块将查询向量化，并从预定义的文档库中检索相关文档。
+3. **生成回答**：生成模块接收查询和检索到的文档作为输入，生成回答。
+4. **输出结果**：模型返回生成的回答给用户。
 
-```python
-from zlai.elasticsearch import *
+### RAG 的优势
 
-hosts = ESUrl.url
-con = get_es_con(hosts=hosts)
-```
+1. **丰富的信息源**：通过结合检索到的文档，生成模型可以利用更广泛的信息源，生成更详细和准确的回答。
+2. **知识更新方便**：文档库可以独立于生成模型进行更新，使得知识更新变得更加便捷，无需重新训练生成模型。
+3. **提高生成质量**：结合检索到的相关文档，生成模型能更好地理解和回答复杂的问题，特别是在知识密集型领域。
 
-## 2. 创建ES索引
+### 应用场景
 
-> 创建ES索引的数据结构: `Document`
+1. **开放域问答**：通过检索相关文档，RAG 可以生成包含更多背景信息的答案，提高问答系统的准确性和实用性。
+2. **对话系统**：在对话系统中，RAG 可以为用户提供更丰富和上下文相关的回答，提高用户体验。
+3. **信息摘要**：RAG 可以结合检索到的文档，生成更加全面和详细的摘要信息。
+4. **技术支持和客服**：在技术支持和客服系统中，RAG 可以快速检索相关文档并生成准确的回答，提升服务效率。
 
-**创建索引的过程类似创建MySQL的表结构。**
+### 技术实现
 
-```python
-from elasticsearch_dsl import Document, tokenizer, analyzer
-from elasticsearch_dsl.field import Text, DenseVector
+1. **预训练模型**：使用如 BERT、RoBERTa 等预训练模型进行查询和文档的向量化编码。
+2. **向量检索**：使用向量数据库（如 Faiss）进行高效的最近邻搜索，从大型文档库中检索相关文档。
+3. **生成模型**：采用如 GPT-3、T5 等预训练生成模型，将查询和检索到的文档结合，生成自然语言回答。
 
-tokenizer_ik = tokenizer('ik_smart')
-analyzer_ik = analyzer('ik_smart', tokenizer=tokenizer_ik)
+### 例子
 
+假设用户输入查询："What are the benefits of using renewable energy?"
 
-class ElasticSearchSchemaTest(Document):
-    url = Text()
-    title = Text(analyzer=analyzer_ik, search_analyzer=analyzer_ik)
-    context = Text(analyzer=analyzer_ik, search_analyzer=analyzer_ik)
-    vector = DenseVector(dims=1024)
-    date = Text()
-```
+1. **检索模块**：检索相关文档，可能包括政府报告、研究论文、新闻文章等，描述了可再生能源的各种好处。
+2. **生成模块**：将查询和检索到的文档输入到生成模型中，生成回答："Using renewable energy sources like wind and solar power has numerous benefits. It reduces greenhouse gas emissions, decreases air pollution, and can provide a sustainable supply of energy. Moreover, it can create jobs and stimulate economic growth in the renewable energy sector."
 
-- `tokenizer/analyzer`: 指定文本字段的分词工具
-- `DenseVector`: 存储向量的字段
+### RAG 的挑战
 
-> 创建ES索引：`create_index`
+1. **检索精度**：检索模块需要高精度地找到与查询最相关的文档，这对整个系统的性能至关重要。
+2. **生成模型的整合**：生成模型需要有效地整合查询和检索到的文档信息，避免信息的失真和误解。
+3. **计算资源**：RAG 需要同时运行检索和生成模块，对计算资源要求较高，可能需要优化资源配置和模型性能。
 
-```python
-from zlai.elasticsearch import *
+### 未来发展
 
-con = get_es_con(hosts=ESUrl.url)
-create_index(
-    index_name='test_index',
-    field_schema=ElasticSearchSchemaTest,
-    reset=True, con=con, disp=True)
-```
+随着自然语言处理和信息检索技术的不断进步，RAG 模型有望在更多领域获得应用和发展。通过进一步优化检索算法和生成模型的结合方式，RAG 可以在提升文本生成质量和信息获取效率方面发挥更大的作用。
 
-## 3. 保存文件至ES数据库
-
-> 保存文件至ES数据库: `doc2es`
-
-```python
-from zlai.elasticsearch import *
-
-con = get_es_con(hosts=ESUrl.url)
-doc2es(data, index_name='test_index', batch_size=2, con=self.con)
-```
-
-## 4. 相似度计算
-
-> 计算中知识库中文本的相似度: `es_cosine_similarity`
-
-```python
-import numpy as np
-from zlai.elasticsearch import *
-
-vector = np.random.rand(1024)
-
-con = get_es_con(hosts=ESUrl.url)
-es_cosine_similarity(
-    vector, index_name=index_name,
-    size=10, doc_vec_name='vector',
-    thresh=0.7, con=con)
-```
-
-> 参数：
-
-- `vector[List[float]]`: 需要匹配的向量
-- `index_name`: 索引名称
-- `size`: 相似度前 size 个数据
-- `doc_vec_name`: 向量数据库中向量字段的名称 `vector`
-- `thresh`: 过滤阈值
-- `con`: 向量数据库链接
-
-## 5. 向量数据索引工具
-
-> `ElasticSearchTools`
-
-- 计算数据量
-- 匹配关键词
-- 依据相似度提取最相思的文本
-
-```python
-import numpy as np
-from zlai.elasticsearch import *
-
-con = get_es_con(hosts=ESUrl.url)
-tools = ElasticSearchTools(index_name='test_index', con=con)
-
-# 计算索引数据量
-tools.count()
-
-# 匹配match_phrase/match_all只能指定一个字段进行匹配
-tools.match_context('中国', fields='title', match_type='match')
-tools.match_context('中国', fields='title', match_type='match_phrase')
-
-# 匹配全量数据
-tools.match_context('中国', match_type='match_all')
-
-# multi_match可以指定多个字段进行匹配
-tools.match_context('中国', fields=[], match_type='multi_match')
-
-# 计算相似度
-vector = np.random.rand(1024)
-tools.cos_smi(vector, size=10, thresh=None, doc_vec_name='vector')
-```
-
-
+------
+@2024/05/14

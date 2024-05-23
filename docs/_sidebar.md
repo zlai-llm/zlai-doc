@@ -5,6 +5,14 @@
   * [大模型调用的便捷方法](llm/zlai-llm-02.md)
   * [本地大模型](llm/zlai-llm-03.md)
   * [大模型参数理论解析](llm/zlai-llm-04.md)
+* **Agent**
+  * [ZLAI-Agent架构介绍](agent/zlai-agent-01.md)
+  * [Agent](agent/zlai-agent-02.md)
+  * [Agent](agent/zlai-agent-03.md)
+  * [Agent](agent/zlai-agent-04.md)
+  * [agent](agent/zlai-agent-05)
+  * [agent](agent/zlai-agent-06)
+  * [agent-tasks-sequence](agent/zlai-agent-03)
 * **Message**
   * [message-消息机制](message/zlai-message-01.md)
 * **Prompt**
@@ -35,10 +43,6 @@
   * [milvus](embedding/milvus.md)
 * **RAG**
   * [RAG](rag/zlai-rag-01.md)
-* **Agent**
-  * [Agent](agent/zlai-agent-01.md)
-  * [agent](agent/zlai-agent.md)
-  * [agent-tasks-sequence](agent/zlai-agent-tasks-sequence.md)
 * **Parse**
   * [document](parse/zlai-document.md)
   * [parse](parse/zlai-parse-01.md)

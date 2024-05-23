@@ -34,8 +34,8 @@
   * [RAG](rag/zlai-rag-01.md)
 * **Agent**
   * [Agent](agent/zlai-agent-01.md)
-  * [agent](agent/zlai-agent.md)
-  * [agent-tasks-sequence](agent/zlai-agent-tasks-sequence.md)
+  * [agent](agent/zlai-agent-05)
+  * [agent-tasks-sequence](agent/zlai-agent-03)
 * **Parse**
   * [document](parse/zlai-document.md)
   * [parse](parse/zlai-parse-01.md)

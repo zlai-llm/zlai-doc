@@ -1,343 +1,154 @@
-# Agent案例-CSV
+# 天气查询
 
-> 本节介绍如何使用大模型Agent进行CSV数据处理。
+> 在之前的介绍中，我们详细介绍了`zlai-agent`的实现原理，并用天气查询这个例子做了详细的说明，这里我们将再次简单介绍一下这个例子，更多的是补充一些前文未关注到的细节。
 
-## 数据
+## AddressAgent
 
-> 我们使用titanic数据集。
+> 这是一个地址解析Agent，从文本中提取出地址信息，并将其转换为标准行政区划。
+
+这是一个示例：
 
 ```python
-import pandas as pd
-from zlai.llms import *
-from zlai.embedding import *
-from zlai.agent import CSV, CSVQA, Tasks, task_list
-from IPython.display import display, Markdown
+from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.agent import AddressAgent
 
-csv_path = "./data/titanic.csv"
-
-df = pd.read_csv(csv_path)
-df.head()
+llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+agent = AddressAgent(llm=llm, agent_name="Address Agent", verbose=True)
+task_completion = agent("北京市朝阳区")
+print(task_completion)
 ```
 
-*数据实例：*
+*日志信息*：
 
 ```text
-|    |   Survived |   Pclass | Name                                               | Sex    |   Age |   Siblings/Spouses Aboard |   Parents/Children Aboard |    Fare |
-|---:|-----------:|---------:|:---------------------------------------------------|:-------|------:|--------------------------:|--------------------------:|--------:|
-|  0 |          0 |        3 | Mr. Owen Harris Braund                             | male   |    22 |                         1 |                         0 |  7.25   |
-|  1 |          1 |        1 | Mrs. John Bradley (Florence Briggs Thayer) Cumings | female |    38 |                         1 |                         0 | 71.2833 |
-|  2 |          1 |        3 | Miss. Laina Heikkinen                              | female |    26 |                         0 |                         0 |  7.925  |
-|  3 |          1 |        1 | Mrs. Jacques Heath (Lily May Peel) Futrelle        | female |    35 |                         1 |                         0 | 53.1    |
-|  4 |          0 |        3 | Mr. William Henry Allen                            | male   |    35 |                         0 |                         0 |  8.05   |
+[Address Agent] User Question: 北京市朝阳区
+==================== [Address Agent] Messages Start ====================
+
+user [6]: [北京市朝阳区]
+
+==================== [Address Agent] Messages End    ====================
+
+[Address Agent] Final Answer:
+{'province': '北京市', 'city': '北京市', 'district': '朝阳区'}
+[Address Agent] Parsed address:
+[{'province': '北京市', 'city': '北京市', 'district': '朝阳区'}]
 ```
 
-## Table-QA
-
-> 让大模型理解这份数据，并回答一些问题。
-
-```python
-llm = Zhipu(generate_config=ZhipuGLM3Turbo(temperature=0.01))
-csv = CSVQA(csv_path=csv_path, llm=llm, verbose=True)
-query = "请使用中文介绍这个表格"
-answer = csv.generate(query=query)
-
-display(Markdown(answer))
-```
-
-*输出*: 
+*最终推理结果`task_completion`信息*：
 
 ```text
-[CSV-QA] Start ...
-
-[CSV-QA]Question: 请使用中文介绍这个表格
-
-==================== [CSV-QA] Messages Start ====================
-user: [请使用中文介绍这个表]
-
-==================== [CSV-QA] Messages End    ====================
-[CSV-QA]Answer: 当然可以。这个表格是关于一些人的基本信息，这些人可能与一次特定的历史事件有关，比如泰坦尼克号沉船事故。表格列出了五个主要的信息类别：
-
-1. **序号** (`|    |`): 这可能是指每个人的记录编号。
-2. **是否生存** (`|   Survived |`): 这一列表明了这些人在事件中是否存活下来。`0` 可能表示未生存，而 `1` 可能表示生存。
-3. **船票等级** (`|   Pclass |`): 这个等级可能指的是他们在船上的舱位等级，例如 `1` 代表一等舱，`3` 代表三等舱。
-4. **姓名** (`| Name                                               |`): 这一列是这些人的姓名。
-5. **性别** (`| Sex    |`): 表明这些人的性别，`male` 代表男性，`female` 代表女性。
-6. **年龄** (`|   Age |`): 这些人的年龄。
-7. **兄弟姐妹/配偶是否同行** (`|   Siblings/Spouses Aboard |`): 这可能指的是这些人在船上是否有兄弟姐妹或配偶同行。
-8. **父母/孩子是否同行** (`|   Parents/Children Aboard |`): 这可能指的是这些人在船上是否有父母或孩子同行。
-9. **票价** (`|    Fare |`): 这些人支付的船票费用。
-
-根据表格中的数据，我们可以看到：
-
-- Owen Harris Braund 是一位22岁的男性，乘坐三等舱，存活了下来，他的票价是7.25。
-- Florence Briggs Thayer Cumings 是一位38岁的女性，乘坐一等舱，存活了下来，她的票价是71.2833。
-- Laina Heikkinen 是一位26岁的女性，乘坐三等舱，存活了下来，她的票价是7.925。
-- Lily May Peel Futrelle 是一位35岁的女性，乘坐一等舱，存活了下来，她的票价是53.1。
-- William Henry Allen 是一位35岁的男性，乘坐三等舱，没有存活下来，他的票价是8.05。
-
-这个表格可能是用来分析泰坦尼克号上不同人群的生存情况，包括他们的性别、舱位等级和年龄等因素。
-
-[CSV-QA] End ...
+TaskCompletion(
+    query='北京市朝阳区', 
+    content="{'province': '北京市', 'city': '北京市', 'district': '朝阳区'}", 
+    parsed_data=StandardAddress(province='北京市', city='北京市', district='朝阳区'), 
+)
 ```
 
-## Table-query
+**可以看到，上面的`AddressAgent`将地址信息解析为省市县三个级别，在`TaskCompletion`中记录了`用户问题`，大模型的回答`content`，以及解析后的数据`parsed_data`。**
 
+## 消息模板`message prompt`
+
+关于消息机制你可以在[这里](message/zlai-message-01)找到详细的介绍，在绝大多数的`Agent`场景中我们都可以设置不同的消息机制来让大模型完成不同的任务。比如，下面是`AddressAgent`中所用到的消息机制：
 
 ```python
-llm = Zhipu(generate_config=ZhipuGLM3Turbo(temperature=0.01))
-csv = CSV(csv_path=csv_path, llm=llm, verbose=True)
+from zlai.prompt import MessagesPrompt
+from zlai.schema import SystemMessage, UserMessage, AssistantMessage
 
-query = "表中有多少数据？"
-answer = csv.generate(query=query)
-display(Markdown(answer))
+system_message = SystemMessage(content="""你是一个地址命名实体识别机器人，你需要解析出文本中出现的省、市、区，并以Dict输出。\
+文本中没有省、市、区，则返回空Dict。""")
+
+few_shot = [
+    UserMessage(content="上海市浦东新区张江高科技园区"),
+    AssistantMessage(content=str({'province': '上海市', 'city': '上海市', 'district': '浦东新区'})),
+    UserMessage(content="广东省深圳市南山区深南大道1001号"),
+    AssistantMessage(content=str({'province': '广东省', 'city': '深圳市', 'district': '南山区'})),
+    UserMessage(content="河北省衡水市景县的天气情况"),
+    AssistantMessage(content=str({'province': '河北省', 'city': '衡水市', 'district': '景县'})),
+    UserMessage(content="你好呀"),
+    AssistantMessage(content=str({})),
+]
+
+messages_prompt: MessagesPrompt = MessagesPrompt(
+    system_message=system_message,
+    few_shot=few_shot,
+    n_shot=5,
+)
+
+query = "北京市朝阳区"
+messages = messages_prompt.prompt_format(content=query)
+print(messages)
 ```
 
-*输出*:
+*打印输出：*
 
 ```text
-[CSV-Script] Start ...
-
-[CSV-Script]Question: 表中有多少数据？
-
-[CSV-Script]Assistant: """python
-len(df)
-"""
-
-[CSV-Script]Parsed code: """
-len(df)
-"""
-
-[CSV-Script]Tools invoke: 887
-
-==================== [CSV-Script] Messages Start ====================
-user: [表中有多少数据]
-
-assistant: ["""python
-len(df)
-"""]
-
-user: [
-Question: 表中有多少数据？
-Observation："""
-887
-"""
-Answer：]
-
-==================== [CSV-Script] Messages End    ====================
-[CSV-Script]Final Answer: 根据您提供的执行结果，表中的数据量是887条记录。.
-
-[CSV-Script] End ...
+[
+    SystemMessage(role='system', content='你是一个地址命名实体识别机器人，你需要解析出文本中出现的省、市、区，并以Dict输出。文本中没有省、市、区，则返回空Dict。'), 
+    UserMessage(role='user', content='上海市浦东新区张江高科技园区'), 
+    AssistantMessage(role='assistant', content="{'province': '上海市', 'city': '上海市', 'district': '浦东新区'}"), 
+    UserMessage(role='user', content='广东省深圳市南山区深南大道1001号'), 
+    AssistantMessage(role='assistant', content="{'province': '广东省', 'city': '深圳市', 'district': '南山区'}"), 
+    UserMessage(role='user', content='河北省衡水市景县的天气情况'), 
+    AssistantMessage(role='assistant', content="{'province': '河北省', 'city': '衡水市', 'district': '景县'}"), 
+    UserMessage(role='user', content='你好呀'),
+    AssistantMessage(role='assistant', content='{}'), 
+    UserMessage(role='user', content='北京市朝阳区')
+]
 ```
 
-> 再来问一个问题
+**通过制定消息模版的方式，可以让大模型知道当前你需要他帮助你完成怎样的任务，通过给定`few-shot`可以让大模型了解你期望它输出的格式与内容。通常情况下给定`5-shot`会比不给定样例有更稳定的输出，但给定过多的样例也会占用过多的推理`tokens`的消耗，你需要根据自己实际的任务合理指定模型应该了解哪些样例。**
+
+**此外，你也可以[参考](message/zlai-message-01?id=messageprompt)对`MessagesPrompt`增加`few-shot`的重排功能，每次选出与当前问题最为接近的几个样例供大模型进行参考。这些细节的调整都会改善大模型输出结果的稳定性与准确性。**
+
+## WeatherAgent
+
+> `WeatherAgent`会接受标准的上文中提到的`AddressAgent`输出的`TaskCompletion`格式的结果作为输入（其实就是标准的地址格式输入），并输出一个`TaskCompletion`格式的结果，即模型对[天气接口](agent/zlai-agent-02?id=参考)信息的总结回答。下面是示例：
 
 ```python
-query = "生存率是多少？"
-csv.generate(query=query)
+from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.agent import WeatherAgent
+
+llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+agent = WeatherAgent(llm=llm, verbose=True)
+task_completion = agent(query=task_completion)
+print(task_completion)
 ```
 
-*输出*:
+*日志信息：*
 
 ```text
-[CSV-Script] Start ...
+[Weather Agent] City Name: 朝阳区
+==================== [Weather Agent] Messages Start ====================
 
-[CSV-Script]Question: 生存率是多少？
+user [189]: [请根据以下天气信息回答问题。
 
-[CSV-Script]Assistant: """python
-survival_rate = df['Survived'].mean()
-print(f"生存率为: {survival_rate:.2f}")
-"""
+信息：{'current_condition': {'temp_C': '18', 'FeelsLikeC': '18', 'humidity': '60',...]
 
-[CSV-Script]Parsed code: """
-survival_rate = df['Survived'].mean()
-print(f"生存率为: {survival_rate:.2f}")
+==================== [Weather Agent] Messages End    ====================
 
-"""
-[CSV-Script]Tools invoke: 生存率为: 0.39
-
-
-==================== [CSV-Script] Messages Start ====================
-user: [生存率是多少]
-
-assistant: ["""python
-survival_rate = df['Survived'].mean()
-print(f"生存率为: {survival_rate:.2f}")
-``]
-
-user: [
-Question: 生存率是多少？
-Observation："""
-生存率为: 0.39
-
-"""
-Answer：]
-
-==================== [CSV-Script] Messages End    ====================
-[CSV-Script]Final Answer: 根据您提供的代码和执行结果，生存率是39%，具体到两位小数是0.39。.
-
-[CSV-Script] End ...
+[Weather Agent] Final Answer:
+当前北京市朝阳区的天气情况是：轻度降雨，温度为18摄氏度，体感温度也是18摄氏度，湿度为60%。这个信息是基于最近的观测时间，即上午9点40分。请注意随时关注实时天气变化，合理安排您的日常活动。
 ```
 
-## Task
+**Tips:**
 
-> task list
+* 前文所描述的[`TaskSequence`](agent/zlai-agent-01?id=顺序执行)是对于`AddressAgent`与`WeatherAgent`的集成。
+* `zlai`中已经将`AddressAgent`与`WeatherAgent`集成，你只需要调用`Weather`即可。上面讲这么多只是为了解释工程流程。
 
 ```python
-task_list
+from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.agent import Weather
+
+llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+agent = Weather(llm=llm, verbose=True)
+task_completion = agent(query="XX天气怎么样？")
 ```
 
-```text
-[TaskDescription(task=<class 'zlai.agent.csv.CSV'>, task_id=0, task_name='数据提取与计算机器人', task_description='可以帮你写一段`DataFrame`脚本代码查询表中数据的具体信息'),
- TaskDescription(task=<class 'zlai.agent.csv.CSVQA'>, task_id=1, task_name='数据表介绍机器人', task_description='可以介绍并回答数据表的基本信息，但不能够查询真实的数据，只能做一般性的介绍。')]
-```
+-----
 
+## 参考链接
 
+* [wttr天气接口](https://wttr.in/)
+* [wttr-github](https://github.com/chubin/wttr.in)
 
-```python
-llm = Zhipu(generate_config=ZhipuGLM3Turbo(temperature=0.01))
-csv = Tasks(llm=llm, task_list=task_list, verbose=True)
-
-query = "请使用中文介绍这个表格"
-answer = csv.generate(query=query, csv_path=csv_path)
-
-display(Markdown(answer))
-```
-
-
-```text
-[Task] Start ...
-
-[Task]Question: 请使用中文介绍这个表格
-==================== [Task] Messages Start ====================
-user: [请使用中文介绍这个表]
-
-==================== [Task] Messages End    ====================
-[Task] matched task id: ['1']
-[Task] task id: 1, task name: 数据表介绍机器人, content: [task_id: 1]
-[CSV-QA] Start ...
-
-[CSV-QA]Question: 请使用中文介绍这个表格
-
-==================== [CSV-QA] Messages Start ====================
-user: [请使用中文介绍这个表]
-
-==================== [CSV-QA] Messages End    ====================
-[CSV-QA]Answer: 当然可以。这个表格是关于一些人的基本信息，这些人可能与一次特定的历史事件有关，例如泰坦尼克号沉船事件。表格列出了五个主要的信息类别：
-
-1. **序号** (`|    |`): 这可能是指每个人的记录编号。
-2. **是否生存** (`|   Survived |`): 这一列表明了这些人在事件中是否存活下来。`0` 可能表示未生存，而 `1` 表示生存。
-3. **船票等级** (`|   Pclass |`): 表示这些乘客购买的船票等级，这里列出的有 `1` 级、`2` 级和 `3` 级，通常船票等级越高，船舱越舒适，费用也越高。
-4. **姓名** (`| Name                                               |`): 乘客的名字。
-5. **性别** (`| Sex    |`): 乘客的性别。
-6. **年龄** (`|   Age |`): 乘客的年龄。
-7. **兄弟姐妹/配偶是否同行** (`|   Siblings/Spouses Aboard |`): 这一列表明了是否有兄弟姐妹或配偶在同一艘船上。
-8. **父母/孩子是否同行** (`|   Parents/Children Aboard |`): 这一列表明了是否有父母或孩子在同一艘船上。
-9. **票价** (`|    Fare |`): 乘客支付的船票费用。
-
-根据表格的前五行数据，我们可以看到：
-
--  Owen Harris Braund 先生，22岁，是 `3` 级乘客，他的船票费用是 `7.25` 英镑，他独自旅行，没有家人同行。
-- Mrs. John Bradley (Florence Briggs Thayer) Cumings 夫人，38岁，是 `1` 级乘客，她的船票费用是 `71.2833` 英镑，她独自旅行，没有家人同行。
-- Miss. Laina Heikkinen 女士，26岁，是 `3` 级乘客，她的船票费用是 `7.925` 英镑，她独自旅行，没有家人同行。
-- Mrs. Jacques Heath (Lily May Peel) Futrelle 夫人，35岁，是 `1` 级乘客，她的船票费用是 `53.1` 英镑，她有配偶同行，没有孩子或父母同行。
-- William Henry Allen 先生，35岁，是 `3` 级乘客，他的船票费用是 `8.05` 英镑，他独自旅行，没有家人同行。
-
-这个表格可能是用来分析乘客的背景、旅行情况以及他们在特定事件中的生存概率等因素的。
-
-[CSV-QA] End ...
-
-
-[Task] End ...
-
-```
-
-
-```python
-query = "生存率是多少？"
-answer = csv.generate(query=query, csv_path=csv_path)
-
-display(Markdown(answer))
-```
-
-
-```python
-query = "计算出表格中的性别比例是多少？"
-answer = csv.generate(query=query, csv_path=csv_path)
-
-display(Markdown(answer))
-```
-
-
-```python
-[Task] Start ...
-
-[Task]Question: 统计表格中船票的不同船票等级的生存率？
-==================== [Task] Messages Start ====================
-user: [统计表格中船票的不同船票等级的生存率]
-
-==================== [Task] Messages End    ====================
-[Task] matched task id: ['0']
-[Task] task id: 0, task name: 数据提取与计算机器人, content: [task_id: 0, task_name: 数据提取与计算机器人, task_description: 可以帮你写一段`DataFrame`脚本代码查询表中数据的具体信息
-```python
-tool_call(task='统计表格中船票的不同船票等级的生存率')
-```]
-[CSV-Script] Start ...
-
-[CSV-Script]Question: 统计表格中船票的不同船票等级的生存率？
-
-[CSV-Script]Assistant: ```python
-# 统计不同船票等级的生存率
-survival_rates_by_class = df.groupby('Pclass')['Survived'].mean()
-print(survival_rates_by_class)
-```
-
-[CSV-Script]Parsed code: ```
-# 统计不同船票等级的生存率
-survival_rates_by_class = df.groupby('Pclass')['Survived'].mean()
-print(survival_rates_by_class)
-
-```
-[CSV-Script]Tools invoke: Pclass
-1    0.629630
-2    0.472826
-3    0.244353
-Name: Survived, dtype: float64
-
-
-==================== [CSV-Script] Messages Start ====================
-user: [统计表格中船票的不同船票等级的生存率]
-
-assistant: [```python
-# 统计不同船票等级的生存率
-survival_rates_by_class = df.groupby('Pclass')['Survived'].mean()
-print(survival_rates_by_class)
-``]
-
-user: [
-Question: 统计表格中船票的不同船票等级的生存率？
-Observation：```
-Pclass
-1    0.629630
-2    0.472826
-3    0.244353
-Name: Survived, dtype: float64
-
-```
-Answer：]
-
-==================== [CSV-Script] Messages End    ====================
-[CSV-Script]Final Answer: 根据提供的执行结果，我们可以得出以下结论：
-
-- 1等舱的生存率为62.96%，
-- 2等舱的生存率为47.28%，
-- 3等舱的生存率为24.44%。
-
-这意味着在泰坦尼克号上，一等舱的乘客生存率最高，而三等舱的乘客生存率最低。.
-
-[CSV-Script] End ...
-
-
-[Task] End ...
-```
-
-
+@2024/05/23

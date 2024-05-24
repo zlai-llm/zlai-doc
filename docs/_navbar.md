@@ -5,6 +5,17 @@
   * [大模型调用的便捷方法](llm/zlai-llm-02.md)
   * [本地大模型](llm/zlai-llm-03.md)
   * [大模型参数理论解析](llm/zlai-llm-04.md)
+* **Agent**
+  * [ZLAI-Agent架构介绍](agent/zlai-agent-01.md)
+  * [天气查询](agent/zlai-agent-02.md)
+  * [数据库查询](agent/zlai-agent-03.md)
+  * [CSV数据查询](agent/zlai-agent-04.md)
+  * [RAG增强索引](agent/zlai-agent-05)
+  * [Bing搜索增强问答](agent/zlai-agent-06)
+  * [Shell命令](agent/zlai-agent-07)
+  * [公募基金问答](agent/zlai-agent-08)
+  * [股票问答](agent/zlai-agent-09)
+  * [其他问答](agent/zlai-agent-10)
 * **Message**
   * [message-消息机制](message/zlai-message-01.md)
 * **Prompt**
@@ -28,14 +39,13 @@
   * [文本的数字化表示](embedding/zlai-embedding-01.md)
   * [向量化在大模型中的应用](embedding/zlai-embedding-02.md)
   * [向量数据库简介](embedding/zlai-embedding-03.md)
+  * [常用向量模型](embedding/zlai-embedding-x.md)
+  * [elasticsearch简介](embedding/zlai-elasticsearch-01.md)
+  * [elasticsearch简介](embedding/zlai-elasticsearch-02.md)
   * [elasticsearch](embedding/zlai-elasticsearch.md)
   * [milvus](embedding/milvus.md)
 * **RAG**
   * [RAG](rag/zlai-rag-01.md)
-* **Agent**
-  * [Agent](agent/zlai-agent-01.md)
-  * [agent](agent/zlai-agent-05)
-  * [agent-tasks-sequence](agent/zlai-agent-03)
 * **Parse**
   * [document](parse/zlai-document.md)
   * [parse](parse/zlai-parse-01.md)

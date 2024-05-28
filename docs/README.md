@@ -9,6 +9,13 @@
 <h5>Fig. Project-ZLAI</h5>
 </center>
 
+-----
+
+<center>
+<img src="./img/wechat-group.jpg" width="200px">
+<h5>Fig. Wechat-Group</h5>
+</center>
+
 ------
 
 <h3>目录</h3>

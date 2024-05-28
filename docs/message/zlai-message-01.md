@@ -268,7 +268,7 @@ print(completion.choices[0].message.content)
 下面的图片展示了`MessagePrompt`的结构逻辑。
 
 <center>
-<img src="../img/zlai-message-01.png" width="680px">
+<img src="img/zlai-message-01.png" width="680px">
 <h6>图：MessagePrompt</h6>
 </center>
 

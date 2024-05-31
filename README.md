@@ -1,4 +1,4 @@
-# ZLAI-Document
+# ZLAI[再来]-Document
 
 > 简单易学的大模型学习手册
 

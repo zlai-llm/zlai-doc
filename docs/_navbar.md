@@ -40,10 +40,9 @@
   * [向量化在大模型中的应用](embedding/zlai-embedding-02.md)
   * [向量数据库简介](embedding/zlai-embedding-03.md)
   * [常用向量模型](embedding/zlai-embedding-x.md)
-  * [elasticsearch简介](embedding/zlai-elasticsearch-01.md)
-  * [elasticsearch简介](embedding/zlai-elasticsearch-02.md)
-  * [elasticsearch](embedding/zlai-elasticsearch.md)
-  * [milvus](embedding/milvus.md)
+  * [向量数据库ES](embedding/zlai-elasticsearch-01.md)
+  * [zlai-es使用方式](embedding/zlai-elasticsearch-02.md)
+  * [向量数据库milvus](embedding/milvus.md)
 * **RAG**
   * [RAG](rag/zlai-rag-01.md)
 * **Parse**

@@ -34,7 +34,7 @@ $$
 one-hot 编码（又称独热编码）是用`N`位状态编码来对N个状态进行编码。每个状态都有它独立的位置，并且在任意时候其中只有一位有效。即每个词表示为一个长向量，向量维度为词表大小，向量中只有一个分量的值为1，其余为0。下面是一个示例：
 
 <center>
-<img src="../img/emb_1.png" width="680px">
+<img src="./img/emb_1.png" width="680px">
 <h6>onehot</h6>
 </center>
 
@@ -49,7 +49,7 @@ one-hot 编码（又称独热编码）是用`N`位状态编码来对N个状态�
 近年来，随着预训练技术的发展，利用来自大型语料库并结合自监督学习构建预训练文本表示模型逐渐成熟。例如：通过使用上下文文本预测当前词，模型可以有监督地从海量文本数据中学习，而无需标签标注。通过这些模型的词表示为一个不随上下文变化而变化的向量。
 
 <center>
-<img src="../img/emb_0.png" width="680px">
+<img src="./img/emb_0.png" width="680px">
 <h6>word2vec</h6>
 </center>
 
@@ -59,12 +59,12 @@ one-hot 编码（又称独热编码）是用`N`位状态编码来对N个状态�
 - `CBOW`假设中心词是基于其在文本序列中的周围上下文词生成的。
 
 <center>
-<img src="../img/word2vec_2.png" width="680px">
+<img src="./img/word2vec_2.png" width="680px">
 <h6>cbow & skipgram</h6>
 </center>
 
 <center>
-<img src="../img/word2vec_0.gif" width="680px">
+<img src="./img/word2vec_0.gif" width="680px">
 <h6>cbow & skipgram</h6>
 </center>
 

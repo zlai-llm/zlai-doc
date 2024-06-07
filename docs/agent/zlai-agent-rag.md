@@ -50,6 +50,10 @@ Retrieval-Augmented Generation (RAG) 是一种结合检索和生成技术的模�
 
 关于，如何将文本转变为向量的表示形式请参考[embedding](embedding/zlai-embedding-02)，向量数据库请参考[elasticsearch](embedding/zlai-elasticsearch-01)。下面将会直接使用与之相关的知识和技术，并不会详细介绍。
 
+<center>
+<img src="https://qdrant.tech/articles_data/what-is-rag-in-ai/how-indexing-works.jpg" width="760px">
+</center>
+
 ## 文本数据向量化
 
 首先，我们需要将文本数据转化为向量形式，以便后续的检索和生成。我们这里假设您已经构建了`ElasticSearch`数据库。

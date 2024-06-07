@@ -11,7 +11,7 @@
   * [数据库查询](agent/zlai-agent-03.md)
   * [CSV数据查询](agent/zlai-agent-04.md)
   * [RAG增强索引](agent/zlai-agent-rag)
-  * [Bing搜索增强问答](agent/zlai-agent-06)
+  * [Bing搜索增强问答](agent/zlai-agent-bing)
   * [Shell命令](agent/zlai-agent-07)
   * [公募基金问答](agent/zlai-agent-08)
   * [股票问答](agent/zlai-agent-09)

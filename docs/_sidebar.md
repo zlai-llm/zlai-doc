@@ -8,9 +8,9 @@
 * **Agent**
   * [ZLAI-Agent架构介绍](agent/zlai-agent-01.md)
   * [天气查询](agent/zlai-agent-02.md)
+  * [RAG增强索引](agent/zlai-agent-rag)
   * [数据库查询](agent/zlai-agent-03.md)
   * [CSV数据查询](agent/zlai-agent-04.md)
-  * [RAG增强索引](agent/zlai-agent-05)
   * [Bing搜索增强问答](agent/zlai-agent-06)
   * [Shell命令](agent/zlai-agent-07)
   * [公募基金问答](agent/zlai-agent-08)

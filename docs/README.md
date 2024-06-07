@@ -51,7 +51,7 @@
 | **Embedding**：`[进度: 10%]`    | [milvus](embedding/milvus.md)                              |    |    |
 | **RAG**：`[进度: 10%]`          | [RAG](rag/zlai-rag-01.md)                                  |    |    |
 | **Agent**：`[进度: 10%]`        | [Agent](agent/zlai-agent-01.md)                            |    |    |
-| **Agent**：`[进度: 10%]`        | [agent](agent/zlai-agent-05)                               |    |    |
+| **Agent**：`[进度: 10%]`        | [agent](agent/zlai-agent-rag)                               |    |    |
 | **Agent**：`[进度: 10%]`        | [agent-tasks-sequence](agent/zlai-agent-03) |    |    |
 | **Parse**：`[进度: 10%]`        | [document](parse/zlai-document.md)                         |    |    |
 | **Parse**：`[进度: 10%]`        | [parse](parse/zlai-parse-01.md)                            |    |    |

@@ -261,7 +261,7 @@ class Weather(TaskSequence):
     ):
         super().__init__(llm=llm, task_list=task_list, *args, **kwargs)
         if task_list is None:
-            self.task_list = task_weather
+            task_list = task_weather
 
 task_seq = Weather(task_list=task_weather, verbose=True)
 ```
@@ -419,8 +419,8 @@ class Chat(TaskSwitch):
             **kwargs: Any,
     ):
         super().__init__(*args, **kwargs)
-        self.task_name = task_name
-        self.task_list = [
+        task_name = task_name
+        task_list = [
             TaskDescription(
                 task=ChatAgent, task_id=0, task_name="闲聊机器人",
                 task_description="""解答用户的各类闲聊问题""",
@@ -591,6 +591,197 @@ TaskCompletion(
     TaskCompletion(query='杭州今天天气怎么样？', task_id=None, task_name=None, content='杭州今天的天气状况是阴天，当前温度为20摄氏度，湿度为72%，体感温度也是20摄氏度。这是凌晨4:54的观测数据。', stream=None, delta=None, script=None, parsed_data={'province': '浙江省', 'city': '杭州市', 'district': ''}, observation=None, data=None, task_description=None)
 ]
 ```
+
+## Agent记忆机制
+
+我们希望一个智能的多Agent系统里，Agent可以像一个助手一样，而不是在使用不同的Agent的时候像同时在对多个助手对话。即在多种Agent协作的情况下，我们需要考虑让多个Agent之间可以互相了解彼此都在做哪些事情，共享Agent的记忆。
+
+假设我们需要设计一个Agent，他可以帮助你查询文档数据库，并且具备闲聊功能，而且在多轮问答中，随着Agent的不断切换具备一定的记忆机制。
+
+<center>
+<img src="./img/zlai-agent-memory.png" width="880px">
+<h5>Fig. Agent记忆机制</h5>
+</center>
+
+下面我们使用代码来演示一下上述考虑。
+
+> 示例配置
+
+```python
+from zlai.agent import *
+from zlai.llms import Zhipu, GLM4FlashGenerateConfig
+from zlai.embedding import PretrainedEmbedding
+from zlai.elasticsearch import get_es_con
+
+index_name = "news"
+hosts = "http://localhost:9200/"
+model_path = "/home/models/BAAI/bge-small-zh-v1.5/"
+con = get_es_con(hosts=hosts)
+embedding = PretrainedEmbedding(
+    model_path=model_path,
+    max_len=512,
+    batch_size=16,
+)
+
+llm = Zhipu(generate_config=GLM4FlashGenerateConfig())
+
+# method - 1 自定义任务描述列表
+task_list = [
+    TaskDescription(
+        task=KnowledgeAgent, task_id=0, task_name="信息检索机器人",
+        task_description="""可以从文本数据库中查询准确的信息，并以准确信息进行回答。""",
+        task_parameters=TaskParameters(
+            verbose=True, use_memory=True, max_memory_messages=10,
+        )
+    ),
+    TaskDescription(
+        task=ChatAgent, task_id=1, task_name="聊天机器人",
+        task_description="""提供普通对话聊天，不涉及专业知识与即时讯息。""",
+        task_parameters=TaskParameters(
+            verbose=True, use_memory=True, max_memory_messages=10,
+        )
+    ),
+]
+
+knowledge = TaskSwitch(
+    task_list=task_list,
+    llm=llm, embedding=embedding, verbose=True,
+    max_memory_messages=10, use_memory=True,
+    index_name=index_name, elasticsearch_host=hosts)
+
+# method - 2 引用定义好的 Knowledge
+Knowledge = Knowledge(
+    llm=llm, embedding=embedding, verbose=True,
+    max_memory_messages=10, use_memory=True,
+    index_name=index_name, elasticsearch_host=hosts)
+```
+
+在上面的代码中，我们使用两种方式定义了`knowledge`这个`agent`，第一种形式显示定义了两个子`Agent`的内容，您也可以使用第二种已经封装好的`Agent`。在这个`Agent`中，大模型首先会对用户问题`Query`进行意图分析，并判断是`闲聊`还是`知识查询`，并将相应的问题转发给子`Agent`。
+
+*注意*：
+
+- `use_memory`: 用于控制模型是否使用记忆机制，默认为`False`
+- `max_memory_messages`: 用于指定模型最大可以使用的历史消息数量。
+
+在示例代码`method - 1`中，您也可以指定部分`Agent`具备记忆，部分`Agent`不具备记忆。
+
+> 使用示例
+
+```python
+task_completion = knowledge("闲聊模式，请记住：你的名字叫小刚，今年33岁，在读博士。")
+print("问题-1: ", task_completion.content)
+task_completion = knowledge("你好")
+print("问题-2: ", task_completion.content)
+task_completion = knowledge("旅游股2024年一季度合计净利润为？")
+print("问题-3: ", task_completion.content)
+task_completion = knowledge("你的名字是？")
+print(len(knowledge.task_completions))
+print("问题-4: ", task_completion.content)
+```
+
+*输出*
+
+```text
+问题-1:  好的，小刚在此。今天天气不错，适合出去走走。你最近在读什么有趣的博士课题呢？有没有什么新发现或者进展想和我分享的？😊
+
+问题-2:  你好！今天心情怎么样？有什么特别的事情想要和我聊聊吗？
+
+问题-3:  旅游股2024年一季度合计净利润为27.39亿元。
+
+问题-4:  我的名字是小刚。有什么可以帮助你的吗？😊
+```
+
+**在上面的示例中，子Agent始终保持了自己的历史记忆，“他的名字叫小刚~”。**
+
+## Agent任务规划
+
+也许还有一种更为复杂的场景需要我们考虑，即一次性的给定大模型多个复杂的任务，让大模型自由的选择工具去执行。比如：
+
+```text
+帮我查询余杭区的天气，并从文本数据库中查询“旅游股2024年一季度合计净利润”。
+```
+
+显然，上面的示例问题中包含了两个任务需要处理，甚至你可以想到有更多任务的场景。这种情况下，就很难再使用`TaskSwitch`的方式简单的转发任务。你需要现将问题拆分为可独立执行的任务，再交由`TaskSwitch`进行转发。
+
+<center>
+<img src="./img/zlai_task_plan.png" width="880px">
+<h5>Fig. Agent任务规划</h5>
+</center>
+
+> `Agent`配置示例：
+
+```python
+from zlai.agent import *
+from zlai.llms import Zhipu, GLM4GenerateConfig
+from zlai.embedding import PretrainedEmbedding
+from zlai.elasticsearch import get_es_con
+
+index_name = "news"
+hosts = "http://localhost:9200/"
+model_path = "/home/models/BAAI/bge-small-zh-v1.5/"
+con = get_es_con(hosts=hosts)
+embedding = PretrainedEmbedding(
+    model_path=model_path,
+    max_len=512,
+    batch_size=16,
+)
+
+llm = Zhipu(generate_config=GLM4GenerateConfig())
+
+task_list = [
+    TaskDescription(
+        task=KnowledgeAgent, task_id=0, task_name="信息检索机器人",
+        task_description="""可以从文本数据库中查询准确的信息，并以准确信息进行回答。""",
+        task_parameters=TaskParameters(
+            verbose=True, use_memory=False, max_memory_messages=10,
+        )
+    ),
+    TaskDescription(
+        task=ChatAgent, task_id=1, task_name="聊天机器人",
+        task_description="""提供普通对话聊天，不涉及专业知识与即时讯息。""",
+        task_parameters=TaskParameters(
+            verbose=True, use_memory=False, max_memory_messages=10,
+        )
+    ),
+    TaskDescription(
+        task=Weather, task_id=2, task_name="天气播报机器人",
+        task_description="""查询当前的天气数据，并为用户播报当前的天气信息""",
+    ),
+]
+
+knowledge = TaskPlan(
+    task_list=task_list, llm=llm, embedding=embedding, verbose=True,
+    max_memory_messages=10, index_name=index_name, elasticsearch_host=hosts
+)
+```
+
+上面的代码配置中，使用`TaskPlan`集成了`闲聊、天气播报、文档查询`三个机器人，`TaskPlan`会将复杂任务拆分为独立可执行的单独任务分发给不同的机器人。
+
+```python
+task_plan_completions = knowledge("帮我查询余杭区的天气，并从文本数据库中查询“旅游股2024年一季度合计净利润”。")
+print(len(knowledge.task_completions))
+for task_plan_completion in task_plan_completions:
+    print(task_plan_completion.task_completion.content)
+```
+
+*输出：*
+
+```text
+问题[1]：
+余杭区的当前天气情况如下：
+- 温度：31摄氏度
+- 体感温度：34摄氏度
+- 湿度：63%
+- 天气状况：部分多云
+- 观测时间：上午08:30
+
+请注意防暑降温，出门请做好防晒措施。
+
+问题[2]：
+根据文本数据库中的信息，2024年一季度旅游股的合计净利润为27.39亿元。
+```
+
+可以看到，`Agent`通过任务规划完成了两个问题的回答。
 
 > **好嘞，我们希望通过以上繁琐的介绍，您能了解`zlai`中处理Agent任务的逻辑与机制，这对后续的任务有着非常大的帮助。并且以上流程机制几乎适用于整个`zlai`中的Agent设计逻辑。** 在后面的介绍中我们将介绍更多的使用示例，并会逐步介绍`zlai`中的Agent任务设计机制。希望这些对您有帮助。
 

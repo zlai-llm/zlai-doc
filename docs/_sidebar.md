@@ -7,6 +7,7 @@
   * [大模型参数理论解析](llm/zlai-llm-04.md)
 * **Agent**
   * [ZLAI-Agent架构介绍](agent/zlai-agent-01.md)
+  * [ZLAI-ToolsAgent](agent/zlai-agent-tools.md)
   * [天气查询](agent/zlai-agent-02.md)
   * [RAG增强索引](agent/zlai-agent-rag)
   * [Bing搜索增强问答](agent/zlai-agent-bing)

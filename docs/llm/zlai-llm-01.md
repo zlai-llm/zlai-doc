@@ -305,6 +305,56 @@ print(completion.choices[0].message.content)
 
 > 模型价格: 目前免费。
 
+## SiliconFlow
+
+> [SiliconFlow](https://siliconflow.cn/zh-cn/siliconcloud)提供一系列大模型API服务，对以下大模型提供免费调用。您可以访问其官网查阅模型细节。`zlai`封装了以下免费模型供您使用：
+
+- `Qwen/Qwen2-7B-Instruct (32K)`
+- `Qwen/Qwen2-1.5B-Instruct (32K)`
+- `Qwen/Qwen1.5-7B-Chat (32K)`
+- `THUDM/glm-4-9b-chat (32K)`
+- `THUDM/chatglm3-6b (32K)`
+- `01-ai/Yi-1.5-9B-Chat-16K (16K)`
+- `01-ai/Yi-1.5-6B-Chat (4K)`
+
+> 调用示例
+
+```python
+from zlai.llms.silicon_flow import *
+from zlai.llms.generate_config.silicon_flow import *
+
+config = [
+    Qwen2Instruct7BGenerateConfig,
+    Qwen2Instruct15BGenerateConfig,
+    Qwen15Chat7BGenerateConfig,
+    GLM3Chat6BGenerateConfig,
+    GLM4Chat9BGenerateConfig,
+    Yi15Chat6BGenerateConfig,
+    Yi15Chat9BGenerateConfig,
+]
+for gen_config in config:
+    llm = SiliconFlow(generate_config=gen_config())
+    data = llm.generate(query="你好")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+Qwen2Instruct7B: 你好！很高兴能为你提供帮助。有什么问题或需要我解答的吗？
+
+Qwen2Instruct15B: 你好！有什么我可以帮助你的吗？
+
+Qwen15Chat7B: 你好！有什么我能为你效劳的吗？
+
+GLM3Chat6B: 你好！很高兴见到你，欢迎问我任何问题。
+
+GLM4Chat9B: 你好👋！很高兴见到你，有什么可以帮助你的吗？
+
+Yi15Chat6B: 你好！有什么我可以帮助你的吗？
+```
+
 ## Baidu
 
 待完成……

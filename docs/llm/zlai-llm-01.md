@@ -307,15 +307,27 @@ print(completion.choices[0].message.content)
 
 ## SiliconFlow
 
-> [SiliconFlow](https://siliconflow.cn/zh-cn/siliconcloud)提供一系列大模型API服务，对以下大模型提供免费调用。您可以访问其官网查阅模型细节。`zlai`封装了以下免费模型供您使用：
+> [SiliconFlow](https://siliconflow.cn/zh-cn/siliconcloud)提供一系列大模型API服务，对以下大模型提供免费调用。您可以访问其官网查阅模型细节。`zlai`封装了以下模型：
 
-- `Qwen/Qwen2-7B-Instruct (32K)`
-- `Qwen/Qwen2-1.5B-Instruct (32K)`
-- `Qwen/Qwen1.5-7B-Chat (32K)`
-- `THUDM/glm-4-9b-chat (32K)`
-- `THUDM/chatglm3-6b (32K)`
-- `01-ai/Yi-1.5-9B-Chat-16K (16K)`
-- `01-ai/Yi-1.5-6B-Chat (4K)`
+| model                                          | config                                | price                                              |
+|------------------------------------------------|---------------------------------------|----------------------------------------------------|
+| `Qwen/Qwen2-7B-Instruct (32K)`                 | Qwen2Instruct7BGenerateConfig         | free                                               |
+| `Qwen/Qwen2-1.5B-Instruct (32K)`               | Qwen2Instruct15BGenerateConfig        | free                                               |
+| `Qwen/Qwen1.5-7B-Chat (32K)`                   | Qwen15Chat7BGenerateConfig            | free                                               |
+| `THUDM/glm-4-9b-chat (32K)`                    | GLM3Chat6BGenerateConfig              | free                                               |
+| `THUDM/chatglm3-6b (32K)`                      | GLM4Chat9BGenerateConfig              | free                                               |
+| `01-ai/Yi-1.5-9B-Chat-16K (16K)`               | Yi15Chat6BGenerateConfig              | free                                               |
+| `01-ai/Yi-1.5-6B-Chat (4K)`                    | Yi15Chat9BGenerateConfig              | free                                               |
+| `01-ai/Yi-1.5-6B-Chat (4K)`                    | Yi15Chat9BGenerateConfig              | free                                               |
+| `Qwen/Qwen2-72B-Instruct (32K)`                | Qwen2Instruct72BGenerateConfig        | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `Qwen/Qwen2-57B-A14B-Instruct (32K)`           | Qwen2Instruct57BA14BGenerateConfig    | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `Qwen/Qwen1.5-110B-Chat (32K)`                 | Qwen15Chat110BGenerateConfig          | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `Qwen/Qwen1.5-32B-Chat (32K)`                  | Qwen15Chat32BGenerateConfig           | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `Qwen/Qwen1.5-14B-Chat (32K)`                  | Qwen15Chat14BGenerateConfig           | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `deepseek-ai/DeepSeek-Coder-V2-Instruct (32K)` | Yi15Chat6BGenerateConfig              | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `deepseek-ai/DeepSeek-V2-Chat (32K)`           | DeepSeekCoderV2InstructGenerateConfig | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `deepseek-ai/deepseek-llm-67b-chat (32K)`      | DeepSeekV2ChatGenerateConfig          | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
+| `01-ai/Yi-1.5-34B-Chat-16K (16K)`              | DeepSeekLLM67BChatGenerateConfig      | [价格表](https://docs.siliconflow.cn/docs/大语言模型-计费规则) |
 
 > 调用示例
 
@@ -355,13 +367,91 @@ GLM4Chat9B: 你好👋！很高兴见到你，有什么可以帮助你的吗？
 Yi15Chat6B: 你好！有什么我可以帮助你的吗？
 ```
 
+## Baichuan
+
+> `zlai`封装了以下Baichuan模型：
+
+| model                  | config                           | price                                           |
+|------------------------|----------------------------------|-------------------------------------------------|
+| `Baichuan4`            | Baichuan4GenerateConfig          | [price](https://platform.baichuan-ai.com/price) |
+| `Baichuan3-Turbo`      | Baichuan3TurboGenerateConfig     | [price](https://platform.baichuan-ai.com/price) |
+| `Baichuan3-Turbo-128k` | Baichuan3Turbo128kGenerateConfig | [price](https://platform.baichuan-ai.com/price) |
+| `Baichuan2-Turbo`      | Baichuan2TurboGenerateConfig     | [price](https://platform.baichuan-ai.com/price) |
+| `Baichuan2-Turbo-192k` | Baichuan2Turbo192kGenerateConfig | [price](https://platform.baichuan-ai.com/price) |
+
+
+> 调用示例
+
+```python
+from zlai.llms.baichuan import *
+from zlai.llms.generate_config.baichuan import *
+
+config = [
+    Baichuan4GenerateConfig,
+    Baichuan3TurboGenerateConfig,
+    Baichuan3Turbo128kGenerateConfig,
+    Baichuan2TurboGenerateConfig,
+    Baichuan2Turbo192kGenerateConfig,
+]
+for gen_config in config:
+    llm = Baichuan(generate_config=gen_config())
+    data = llm.generate(query="你好")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+Baichuan4: 你好！有什么我可以帮助你的吗？
+
+Baichuan3Turbo: 你好！有什么我可以帮助你的吗？
+
+Baichuan3Turbo128k: 你好！有什么可以帮助你的吗？
+
+Baichuan2Turbo: 你好，有什么我可以帮助你的吗？
+
+Baichuan2Turbo192k: 你好，有什么我可以帮助你的吗？
+```
+
+
+## DeepSeek
+
+> `zlai`封装了以下DeepSeek模型：
+
+| model            | config                      | price                                                          |
+|------------------|-----------------------------|----------------------------------------------------------------|
+| `deepseek-chat`  | DeepSeekChatGenerateConfig  | [price](https://platform.deepseek.com/api-docs/zh-cn/pricing/) |
+| `deepseek-coder` | DeepSeekCoderGenerateConfig | [price](https://platform.deepseek.com/api-docs/zh-cn/pricing/) |
+
+> 调用示例
+
+```python
+from zlai.llms.deepseek import *
+from zlai.llms.generate_config.deepseek import *
+
+config = [
+    DeepSeekChatGenerateConfig,
+    DeepSeekCoderGenerateConfig,
+]
+for gen_config in config:
+    llm = DeepSeek(generate_config=gen_config())
+    data = llm.generate(query="你好")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+DeepSeekChatGenerateConfig: 你好！有什么我可以帮助你的吗？
+
+DeepSeekCoderGenerateConfig: 你好！有什么我可以帮助你的吗？
+```
+
 ## Baidu
 
 待完成……
 
-## Baichuan
-
-待完成……
-
 -----
-@2024/04/29
+@2024/06/26

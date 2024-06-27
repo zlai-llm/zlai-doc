@@ -8,6 +8,7 @@
 * **Agent**
   * [ZLAI-Agent架构介绍](agent/zlai-agent-01.md)
   * [ZLAI-ToolsAgent](agent/zlai-agent-tools.md)
+  * [ZLAI-Charts-Tools](agent/zlai-charts-tools)
   * [天气查询](agent/zlai-agent-02.md)
   * [RAG增强索引](agent/zlai-agent-rag)
   * [Bing搜索增强问答](agent/zlai-agent-bing)

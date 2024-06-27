@@ -17,7 +17,7 @@ from zlai.agent.tools import *
 llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
 # 将定义好的工具 get_weather, random_number_generator 添加到工具集Tools中
-tools = Tools(function_list=[get_weather, random_number_generator])
+tools = Tools(tool_list=[get_weather, random_number_generator])
 
 # 创建一个ToolsAgent实例，并指定大模型llm和工具集tools
 agent = ToolsAgent(llm=llm, tools=tools, verbose=True)
@@ -139,7 +139,7 @@ from zlai.agent import Tools, ToolsAgent
 
 llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
-tools = Tools(function_list=[get_current_fund])
+tools = Tools(tool_list=[get_current_fund])
 agent = ToolsAgent(llm=llm, tools=tools, verbose=True)
 task_completion = agent("帮忙查询基金代码为008888的当前行情数据。")
 print(task_completion.content)

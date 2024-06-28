@@ -13,7 +13,7 @@
   * [RAG增强索引](agent/zlai-agent-rag)
   * [Bing搜索增强问答](agent/zlai-agent-bing)
   * [Shell命令](agent/zlai-agent-07)
-  * [公募基金问答](agent/zlai-agent-08)
+  * [公募基金问答](agent/zlai-agent-fund)
   * [股票问答](agent/zlai-agent-09)
   * [其他问答](agent/zlai-agent-10)
 * **Message**

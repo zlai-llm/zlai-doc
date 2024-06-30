@@ -160,19 +160,34 @@ from zlai.llms import Ali
 
 `zlai`封装了几乎所有阿里的线上大模型，您只需要指定一个模型配置类即可完成模型的调用配置生成。相关参数的配置可以参考上文`Zhipu`部分，你也可以参考[官网的文档](https://help.aliyun.com/zh/dashscope/developer-reference/model-square/)。
 
-- `AliQwenTurboGenerateConfig`
-- `AliQwenPlusGenerateConfig`
-- `AliQwenMaxGenerateConfig`
-- `AliQwenMax1201GenerateConfig`
-- `AliQwenMaxLongContextGenerateConfig`
-- `AliQwen15Chat72BGenerateConfig`
-- `AliQwen15Chat14BGenerateConfig`
-- `AliQwen15Chat7BGenerateConfig`
-- `AliQwenChat72BGenerateConfig`
-- `AliQwenChat14BGenerateConfig`
-- `AliQwenChat7BGenerateConfig`
-- `AliQwenChat18BGenerateConfig`
-- `AliQwenChat18BLongContextGenerateConfig`
+| 模型名称                         | 配置类                                         | 备注    |
+|------------------------------|---------------------------------------------|-------|
+| `Qwen-Turbo`                 | `AliQwenTurboGenerateConfig()`              | 以官网为准 |
+| `Qwen-Plus`                  | `AliQwenPlusGenerateConfig()`               | 以官网为准 |
+| `Qwen-Max`                   | `AliQwenMaxGenerateConfig()`                | 以官网为准 |
+| `Qwen-Max1201`               | `AliQwenMax1201GenerateConfig()`            | 以官网为准 |
+| `Qwen-Max0428`               | `AliQwenMax0428GenerateConfig()`            | 以官网为准 |
+| `Qwen-Max0403`               | `AliQwenMax0403GenerateConfig()`            | 以官网为准 |
+| `Qwen-Max0107`               | `AliQwenMax0107GenerateConfig()`            | 以官网为准 |
+| `Qwen-MaxLongContext`        | `AliQwenMaxLongContextGenerateConfig()`     | 以官网为准 |
+| `qwen2-57b-a14b-instruct`    | `AliQwen2Instruct57BA14BGenerateConfig()`   | 以官网为准 |
+| `qwen2-72b-instruct`         | `AliQwen2Instruct72BGenerateConfig()`       | 以官网为准 |
+| `qwen2-7b-instruct`          | `AliQwenInstruct27BGenerateConfig()`        | 以官网为准 |
+| `qwen2-1.5b-instruct`        | `AliQwen2Instruct15BGenerateConfig()`       | Free  |
+| `qwen2-0.5b-instruct`        | `AliQwen2Instruct05BGenerateConfig()`       | Free  |
+| `qwen1.5-110b-chat`          | `AliQwen15Chat110BGenerateConfig()`         | 以官网为准 |
+| `Qwen1.5-Chat-72B`           | `AliQwen15Chat72BGenerateConfig()`          | 以官网为准 |
+| `qwen1.5-32b-chat`           | `AliQwen15Chat32BGenerateConfig()`          | 以官网为准 |
+| `Qwen1.5-Chat-14B`           | `AliQwen15Chat14BGenerateConfig()`          | 以官网为准 |
+| `Qwen1.5-Chat-7B`            | `AliQwen15Chat7BGenerateConfig()`           | 以官网为准 |
+| `qwen1.5-1.8b-chat`          | `AliQwen15Chat18BGenerateConfig()`          | Free  |
+| `qwen1.5-0.5b-chat`          | `AliQwen15Chat05BGenerateConfig()`          | Free  |
+| `codeqwen1.5-7b-chat`        | `AliQwen15Code7BGenerateConfig()`           | 以官网为准 |
+| `Qwen-Chat-72B`              | `AliQwenChat72BGenerateConfig()`            | 以官网为准 |
+| `Qwen-Chat-14B`              | `AliQwenChat14BGenerateConfig()`            | 以官网为准 |
+| `Qwen-Chat-7B`               | `AliQwenChat7BGenerateConfig()`             | 以官网为准 |
+| `Qwen-Chat-1.8B`             | `AliQwenChat18BGenerateConfig()`            | Free  |
+| `Qwen-Chat-1.8B-LongContext` | `AliQwenChat18BLongContextGenerateConfig()` | -     |
 
 ```python
 # 导入阿里大模型配置类
@@ -222,24 +237,6 @@ print(completion.output.choices[0].message.content)
 ```text
 你好！很高兴为你提供帮助。有什么我可以解答的问题吗？
 ```
-
-> 模型价格：
-
-| 模型名称                         | 配置类                                         | 备注                  |
-|------------------------------|---------------------------------------------|---------------------|
-| `Qwen-Turbo`                 | `AliQwenTurboGenerateConfig()`              | 0.008元/1,000 tokens |
-| `Qwen-Plus`                  | `AliQwenPlusGenerateConfig()`               | 0.02元/1,000 tokens  |
-| `Qwen-Max`                   | `AliQwenMaxGenerateConfig()`                | 0.12元/1,000 tokens  |
-| `Qwen-Max1201`               | `AliQwenMax1201GenerateConfig()`            | 0.12元/1,000 tokens  |
-| `Qwen-MaxLongContext`        | `AliQwenMaxLongContextGenerateConfig()`     | 0.12元/1,000 tokens  |
-| `Qwen-1.5-Chat-72B`          | `AliQwen15Chat72BGenerateConfig()`          | 0.02元/1,000 tokens  |
-| `Qwen-1.5-Chat-14B`          | `AliQwen15Chat14BGenerateConfig()`          | 0.008元/1,000 tokens |
-| `Qwen-1.5-Chat-7B`           | `AliQwen15Chat7BGenerateConfig()`           | 0.006元/1,000 tokens |
-| `Qwen-Chat-72B`              | `AliQwenChat72BGenerateConfig()`            | 0.02元/1,000 tokens  |
-| `Qwen-Chat-14B`              | `AliQwenChat14BGenerateConfig()`            | 0.008元/1,000 tokens |
-| `Qwen-Chat-7B`               | `AliQwenChat7BGenerateConfig()`             | 0.006元/1,000 tokens |
-| `Qwen-Chat-1.8B`             | `AliQwenChat18BGenerateConfig()`            | -                   |
-| `Qwen-Chat-1.8B-LongContext` | `AliQwenChat18BLongContextGenerateConfig()` | -                   |
 
 ## Atom
 
@@ -346,8 +343,8 @@ config = [
 ]
 for gen_config in config:
     llm = SiliconFlow(generate_config=gen_config())
-    data = llm.generate(query="你好")
-    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    completion = llm.generate(query="你好")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {completion.choices[0].message.content}")
     print()
 ```
 
@@ -395,8 +392,8 @@ config = [
 ]
 for gen_config in config:
     llm = Baichuan(generate_config=gen_config())
-    data = llm.generate(query="你好")
-    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    completion = llm.generate(query="你好")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {completion.choices[0].message.content}")
     print()
 ```
 
@@ -436,8 +433,8 @@ config = [
 ]
 for gen_config in config:
     llm = DeepSeek(generate_config=gen_config())
-    data = llm.generate(query="你好")
-    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    completion = llm.generate(query="你好")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {completion.choices[0].message.content}")
     print()
 ```
 
@@ -451,7 +448,142 @@ DeepSeekCoderGenerateConfig: 你好！有什么我可以帮助你的吗？
 
 ## Baidu
 
-待完成……
+> 百度[千帆大模型](https://cloud.baidu.com/doc/WENXINWORKSHOP/index.html)，下面是百度的几款免费的大模型。
+
+| series        | name                   | config                               | price |
+|---------------|------------------------|--------------------------------------|-------|
+| ERNIE Speed系列 | ERNIE-Speed-8K         | `ErnieSpeed8KGenerateConfig`         | free  |
+| ERNIE Speed系列 | ERNIE-Speed-128K       | `ErnieSpeed128KGenerateConfig`       | free  |
+| ERNIE Speed系列 | ERNIE Speed-AppBuilder | `ErnieSpeedAppBuilderGenerateConfig` | free  |
+| ERNIE Lite系列  | ERNIE-Lite-8K          | `ErnieLite8KGenerateConfig`          | free  |
+| ERNIE Lite系列  | ERNIE-Lite-8K-0922     | `ErnieLite8K0922GenerateConfig`      | free  |
+| ERNIE Tiny系列  | ERNIE-Tiny-8K          | `ErnieTiny8KGenerateConfig`          | free  |
+
+> 调用示例
+
+```python
+from zlai.llms import Baidu
+from zlai.llms.generate_config.baidu import *
+
+config = [
+    ErnieSpeed8KGenerateConfig,
+    ErnieSpeed128KGenerateConfig,
+    ErnieSpeedAppBuilderGenerateConfig,
+    ErnieLite8KGenerateConfig,
+    ErnieLite8K0922GenerateConfig,
+    ErnieTiny8KGenerateConfig,
+]
+for gen_config in config:
+    llm = Baidu(generate_config=gen_config())
+    completion = llm.generate(query="1+1=")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {completion.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+ErnieSpeed8K: 您好，这是一个简单的数学问题，1+1等于2。
+ErnieSpeed128K: 您好，这是一个简单的数学问题，1+1等于2。
+ErnieSpeedAppBuilder: 因为算式的每个数相加的结果都是$0$，所以最终结果就是$0$。
+ErnieLite8K: 计算结果为：$1+1 = 2$
+ErnieLite8K0922: 1+1=2。这是一个基本的数学等式，代表一加一等于二。
+ErnieTiny8K: “1+1=”是一个简单的数学表达式，表示两个相同的数字相加的结果。在数学中，这是基本的加法运算。因此，这个答案应该是“等于”。
+```
+
+## Doubao
+
+> 字节跳动[豆包`Doubao`大模型](https://www.volcengine.com/docs/82379/1263512)
+
+| 模型名称             | 简介                                                                      |
+|:-----------------|:------------------------------------------------------------------------|
+| Doubao-lite-4k   | Doubao-lite拥有极致的响应速度，更好的性价比，为客户不同场景提供更灵活的选择。支持4k上下文窗口的推理和精调。            |
+| Doubao-lite-32k  | Doubao-lite拥有极致的响应速度，更好的性价比，为客户不同场景提供更灵活的选择。支持32k上下文窗口的推理和精调。           |
+| Doubao-lite-128k | Doubao-lite 拥有极致的响应速度，更好的性价比，为客户不同场景提供更灵活的选择。支持128k上下文窗口的推理和精调。         |
+| Doubao-pro-4k    | 效果最好的主力模型，适合处理复杂任务，在参考问答、总结摘要、创作、文本分类、角色扮演等场景都有很好的效果。支持4k上下文窗口的推理和精调。   |
+| Doubao-pro-32k   | 效果最好的主力模型，适合处理复杂任务，在参考问答、总结摘要、创作、文本分类、角色扮演等场景都有很好的效果。支持32k上下文窗口的推理和精调。  |
+| Doubao-pro-128k  | 效果最好的主力模型，适合处理复杂任务，在参考问答、总结摘要、创作、文本分类、角色扮演等场景都有很好的效果。支持128k上下文窗口的推理和精调。 |
+
+> 调用示例
+
+```python
+from zlai.llms import DouBao, OpenAIGenerateConfig
+
+models = [
+    "ep-20240630100146-r89zj",
+    "ep-20240630100032-29bh9",
+    "ep-20240630100000-xvz2b",
+    "ep-20240630095928-f9fl7",
+    "ep-20240630095857-p9kbd",
+    "ep-20240630095730-6c7sc",
+]
+
+for model in models:
+    llm = DouBao(generate_config=OpenAIGenerateConfig(model=model))
+    completion = llm.generate("1+1=")
+    print(f"{model}: {completion.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+ep-20240630100146-r89zj : 在常规的数学运算中，1+1=2。但在一些情况下，答案可能会有所不同。例如，在计算机的二进制中，1+1=10。如果是脑筋急转弯的话，答案可能会更加多样。
+ep-20240630100032-29bh9 : 在常规的数学运算中，1+1=2。但在一些情况下，答案可能会有所不同。例如，在计算机的二进制中，1+1=10。如果是脑筋急转弯的话，答案可能会更加多样。
+ep-20240630100000-xvz2b : 2
+ep-20240630095928-f9fl7 : 1 + 1 = 2 
+ep-20240630095857-p9kbd : 1+1=2
+ep-20240630095730-6c7sc : 在常规的数学运算中，1+1=2。但在一些情况下，答案可能会有所不同。例如，在计算机的二进制中，1+1=10。如果是脑筋急转弯的话，答案可能会更加多样。
+```
+
+## Spark
+
+> 科大讯飞[Spark大模型](https://xinghuo.xfyun.cn/sparkapi)
+
+| model           | config                    | price                                      |
+|-----------------|---------------------------|--------------------------------------------|
+| `Spark-Lite`    | SparkLiteGenerateConfig   | [price](https://xinghuo.xfyun.cn/sparkapi) |
+| `Spark-V2`      | SparkV2GenerateConfig     | [price](https://xinghuo.xfyun.cn/sparkapi) |
+| `Spark-Pro`     | SparkProGenerateConfig    | [price](https://xinghuo.xfyun.cn/sparkapi) |
+| `Spark-Max`     | SparkMaxGenerateConfig    | [price](https://xinghuo.xfyun.cn/sparkapi) |
+| `Spark-4-Ultra` | Spark4UltraGenerateConfig | [price](https://xinghuo.xfyun.cn/sparkapi) |
+
+*Tips:*
+
+```text
+# 控制台获取key和secret拼接，假使APIKey是key123456，APISecret是secret123456
+api_key="key123456:secret123456", 
+```
+
+> 调用示例
+
+```python
+from zlai.llms import Spark
+from zlai.llms.generate_config.spark import *
+
+config = [
+    SparkLiteGenerateConfig,
+    SparkV2GenerateConfig,
+    SparkProGenerateConfig,
+    SparkMaxGenerateConfig,
+    Spark4UltraGenerateConfig,
+]
+for gen_config in config:
+    llm = Spark(generate_config=gen_config())
+    data = llm.generate(query="1+1=")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+SparkLite: 1+1的解答过程很简单，因为这是一个基本的算术加法。将两个数相加，即：\n\n$1+1$ =2\n\n所以，$1+1$ =2。
+SparkV2: 2
+SparkPro: $1+1$ =2
+SparkMax: $1+1$ =2
+Spark4Ultra: $1+1$ =2
+```
 
 -----
 @2024/06/26

@@ -152,10 +152,14 @@ print(completion.choices[0].message.content)
 
 > 模型价格
 
-| 模型名称          | 配置类                | 备注               |
-|---------------|--------------------|------------------|
-| `glm-4`       | `ZhipuGLM4()`      | 0.1元 / 千tokens   |
-| `glm-3-turbo` | `ZhipuGLM3Turbo()` | 0.005元 / 千tokens |
+| 模型名称          | 配置类                         | 备注    |
+|---------------|-----------------------------|-------|
+| `glm-4`       | `GLM4GenerateConfig()`      | 以官网为准 |
+| `glm-4-0520`  | `GLM40520GenerateConfig()`  | 以官网为准 |
+| `glm-4-air`   | `GLM4AirGenerateConfig()`   | 以官网为准 |
+| `glm-4-airx`  | `GLM4AirXGenerateConfig()`  | 以官网为准 |
+| `glm-4-flash` | `GLM4FlashGenerateConfig()` | 以官网为准 |
+| `glm-3-turbo` | `GLM3TurboGenerateConfig()` | 以官网为准 |
 
 ## Ali
 

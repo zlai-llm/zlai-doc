@@ -1,6 +1,4 @@
-<img src='img/llm-icon.png' width='100px'>
-
-# zlai-llm <small>0.1</small>
+<img src='img/zlai-icon/01.svg' width='20%' height="20%">
 
 > 简单易学的大模型学习手册
 

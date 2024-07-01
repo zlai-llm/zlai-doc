@@ -2,7 +2,7 @@
 
 > 本节介绍`zlai`中大模型的调研方式。
 
-目前，`zlai`支持多种在线大模型的调研，包括`ZhipuAI`、`Ali`、`Atom`、`MoonShot`、`Baichuan（待发版）`、`Baidu（待发版）`等。在`zlai`中你只需定义`模型类`与`模型配置类`两个实例即可完成模型的调用，不同的平台上的大模型我们都使用了相同的调用输出规范。
+目前，`zlai`支持多种在线大模型的调研，包括`ZhipuAI`、`Ali`、`Atom`、`MoonShot`、`Baichuan`、`Baidu`等。在`zlai`中你只需定义`模型类`与`模型配置类`两个实例即可完成模型的调用，不同的平台上的大模型我们都使用了相同的调用输出规范。
 
 本章节介绍大模型的API调用方式，并提供一些示例代码。包括了本地部署的模型API调用方式，以及使用大模型API的示例代码。
 
@@ -10,14 +10,22 @@
 
 ## API KEY
 
-在调用在线大模型时，您需要申请相关平台的`API KEY`，并将其配置到`环境变量`中。以下是各个平台`API KEY`的申请地址与`zlai`中对应的环境变量标准名称：
+在调用在线大模型时，您需要申请相关平台的`API KEY`，并将其配置到`环境变量`中，相关模型的`API-Key`获取方式可以查阅下面所列举的官网地址。以下是各个平台`API KEY`的申请地址与`zlai`中对应的环境变量标准名称：
 
-| 平台                    | 文档地址                                    | API-Key         | 环境变量名称           |
-|-----------------------|-----------------------------------------|-----------------|------------------|
-| 智谱AI（付费）              | [doc](https://open.bigmodel.cn/dev/api) | 参考官网API-Key申请方式 | ZHIPU_API_KEY    |
-| 阿里（付费）                | [doc](https://dashscope.aliyun.com/)    | 参考官网API-Key申请方式 | ALI_API_KEY      |
-| 月之暗面（付费）              | [doc](https://platform.moonshot.cn)     | 参考官网API-Key申请方式 | MOONSHOT_API_KEY |
-| Atom（暂时免费-2024/04/26） | [doc](https://llama.family/docs/api)    | 参考官网API-Key申请方式 | ATOM_API_KEY     |
+| 公司                | 模型            | 官网文档                                                         | 环境变量名称                                |
+|-------------------|---------------|--------------------------------------------------------------|---------------------------------------|
+| 智谱AI              | `GLM`         | [Doc](https://open.bigmodel.cn/dev/api)                      | ZHIPU_API_KEY                         |
+| 阿里-灵积             | `Qwen`        | [Doc](https://dashscope.aliyun.com/)                         | ALI_API_KEY                           |
+| Llama Family      | `Atom`        | [Doc](https://llama.family/docs/api)                         | ATOM_API_KEY                          |
+| 硅基智能 Silicon Flow | `Qwen/GLM/Yi` | [Doc](https://docs.siliconflow.cn/docs)                      | SILICON_FLOW_API_KEY                  |
+| 百川                | `Baichuan`    | [Doc](https://platform.baichuan-ai.com/docs/api)             | BAICHUAN_API_KEY                      |
+| 深度求索              | `DeepSeek`    | [Doc](https://platform.deepseek.com/api-docs/zh-cn/)         | DEEPSEEK_API_KEY                      |
+| 百度 千帆             | `Ernie`       | [Doc](https://cloud.baidu.com/doc/WENXINWORKSHOP/index.html) | QIANFAN_ACCESS_KEY/QIANFAN_SECRET_KEY |
+| 字节跳动              | 豆包 `Doubao`   | [Doc](https://www.volcengine.com/docs/82379/1263512)         | DOUBAO_API_KEY                        |
+| 科大讯飞              | 花火 `Spark`    | [Doc](https://xinghuo.xfyun.cn/sparkapi)                     | SPARK_API_KEY                         |
+| 腾讯                | 混元 `HunYuan`  | [Doc](https://cloud.tencent.com/product/hunyuan)             | HUNYUAN_API_KEY                       |
+| 零一万物              | `Yi`          | [Doc](https://platform.lingyiwanwu.com/)                     | YI_API_KEY                            |
+| 月之暗面              | `moonshot`    | [Doc](https://platform.moonshot.cn)                          | MOONSHOT_API_KEY                      |
 
 > 环境变量的配置方式
 
@@ -28,6 +36,11 @@
 以下是一些大模型调用示例。
 
 ## ZhipuAI
+
+> 配置API-Key
+
+- API Key Name: `ZHIPU_API_KEY`
+- Value: `API-Key`
 
 > **模型方法**: `Zhipu`用于调用智谱AI的模型。
 
@@ -55,7 +68,7 @@ from zlai.llms import Zhipu
 ```python
 # 导入智谱大模型配置类
 from zlai.llms import (
-    ZhipuGLM3Turbo, ZhipuGLM4
+    GLM3TurboGenerateConfig, GLM4GenerateConfig
 )
 ```
 
@@ -70,10 +83,10 @@ from zlai.llms import (
 **完整调用示例**
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo, ZhipuGLM4
+from zlai.llms import Zhipu, GLM3TurboGenerateConfig, GLM4GenerateConfig
 
 # 创建模型推理配置
-generate_config = ZhipuGLM3Turbo(
+generate_config = GLM3TurboGenerateConfig(
     max_tokens=1500,               # 用于指定模型在生成内容时token的最大数量
     top_p=0.8,                     # 生成过程中核采样方法概率阈值
     temperature=0.85,              # 用于控制随机性和多样性的程度
@@ -145,6 +158,11 @@ print(completion.choices[0].message.content)
 | `glm-3-turbo` | `ZhipuGLM3Turbo()` | 0.005元 / 千tokens |
 
 ## Ali
+
+> 配置API-Key
+
+- API Key Name: `ALI_API_KEY`
+- Value: `API-Key`
 
 > **模型方法**: `Ali`用于调用阿里的线上模型。
  
@@ -240,6 +258,11 @@ print(completion.output.choices[0].message.content)
 
 ## Atom
 
+> 配置API-Key
+
+- API Key Name: `ATOM_API_KEY`
+- Value: `API-Key`
+
 Atom是由[Llama中文社区](https://llama.family/)和AtomEcho（原子回声）联合研发的大模型，基于Llama2-7B采用大规模的中文数据进行了继续预训练，目前其官网上提供`Atom-1B/Atom-13B/Atom-7B`三个可免费调用的大模型。同时也提供了最新基于`Llama3`微调的`Llama3-Chinese-8B-Instruct`可供API调用。
 
 > **模型方法**: `Ali`用于调用阿里的线上模型。
@@ -304,6 +327,11 @@ print(completion.choices[0].message.content)
 
 ## SiliconFlow
 
+> 配置API-Key
+
+- API Key Name: `SILICON_FLOW_API_KEY`
+- Value: `API-Key`
+
 > [SiliconFlow](https://siliconflow.cn/zh-cn/siliconcloud)提供一系列大模型API服务，对以下大模型提供免费调用。您可以访问其官网查阅模型细节。`zlai`封装了以下模型：
 
 | model                                          | config                                | price                                              |
@@ -366,6 +394,11 @@ Yi15Chat6B: 你好！有什么我可以帮助你的吗？
 
 ## Baichuan
 
+> 配置API-Key
+
+- API Key Name: `BAICHUAN_API_KEY`
+- Value: `API-Key`
+
 > `zlai`封装了以下Baichuan模型：
 
 | model                  | config                           | price                                           |
@@ -411,8 +444,12 @@ Baichuan2Turbo: 你好，有什么我可以帮助你的吗？
 Baichuan2Turbo192k: 你好，有什么我可以帮助你的吗？
 ```
 
-
 ## DeepSeek
+
+> 配置API-Key
+
+- API Key Name: `DEEPSEEK_API_KEY`
+- Value: `API-Key`
 
 > `zlai`封装了以下DeepSeek模型：
 
@@ -447,6 +484,11 @@ DeepSeekCoderGenerateConfig: 你好！有什么我可以帮助你的吗？
 ```
 
 ## Baidu
+
+> 配置API-Key
+
+- API Key Name: `QIANFAN_ACCESS_KEY/QIANFAN_SECRET_KEY`
+- Value: `QIANFAN_ACCESS_KEY/QIANFAN_SECRET_KEY`
 
 > 百度[千帆大模型](https://cloud.baidu.com/doc/WENXINWORKSHOP/index.html)，下面是百度的几款免费的大模型。
 
@@ -493,6 +535,11 @@ ErnieTiny8K: “1+1=”是一个简单的数学表达式，表示两个相同的
 
 ## Doubao
 
+> 配置API-Key
+
+- API Key Name: `DOUBAO_API_KEY`
+- Value: `API-Key`
+
 > 字节跳动[豆包`Doubao`大模型](https://www.volcengine.com/docs/82379/1263512)
 
 | 模型名称             | 简介                                                                      |
@@ -537,6 +584,11 @@ ep-20240630095730-6c7sc : 在常规的数学运算中，1+1=2。但在一些情�
 ```
 
 ## Spark
+
+> 配置API-Key
+
+- API Key Name: `SPARK_API_KEY`
+- Value: `API-Key`
 
 > 科大讯飞[Spark大模型](https://xinghuo.xfyun.cn/sparkapi)
 
@@ -585,5 +637,148 @@ SparkMax: $1+1$ =2
 Spark4Ultra: $1+1$ =2
 ```
 
+## HunYuan
+
+> 配置API-Key
+
+- API Key Name: `HUNYUAN_API_KEY`
+- Value: `SecretId:SecretKey`
+
+> 腾讯混元[HunYuan](https://hunyuan.tencent.com/)大模型
+
+| model                   | config                            | price                                 |
+|-------------------------|-----------------------------------|---------------------------------------|
+| `hunyuan-lite`          | HunYuanLiteGenerateConfig         | [price](https://hunyuan.tencent.com/) |
+| `hunyuan-standard`      | HunYuanStandardGenerateConfig     | [price](https://hunyuan.tencent.com/) |
+| `hunyuan-standard-256k` | HunYuanStandard256KGenerateConfig | [price](https://hunyuan.tencent.com/) |
+| `hunyuan-pro`           | HunYuanProGenerateConfig          | [price](https://hunyuan.tencent.com/) |
+
+> 调用示例
+
+```python
+from zlai.llms import HunYuan
+from zlai.llms.generate_config.hunyuan import *
+
+models = [
+    HunYuanLiteGenerateConfig,
+    HunYuanStandardGenerateConfig,
+    HunYuanStandard256KGenerateConfig,
+    HunYuanProGenerateConfig,
+]
+
+for gen_config in models:
+    llm = HunYuan(generate_config=gen_config())
+    data = llm.generate(query="1+1=")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+HunYuanLite: 1加1等于1+1 = 2。
+HunYuanStandard: 在数学中，加法是一种基本的算术运算。当我们进行两个数的加法时，我们实际上是在计算这两个数相加的和。在这个例子中，我们将数字1与另一个数字1相加。根据加法的定义，1 + 1 的结果是2。所以，1 + 1 = 2。
+HunYuanStandard256K: 计算结果为:1 + 1 = 2
+HunYuanPro: 这是一个非常基础的数学问题，涉及到加法运算。在这个问题中，我们需要将两个相同的数相加，这两个数都是1。\n\n当我们进行加法运算时，我们简单地将这两个数相加。在这种情况下，1加1等于2。\n\n所以，1+1的答案是2。
+```
+
+## Yi
+
+> 配置AP-Key
+
+- API Key Name: `YI_API_KEY`
+- Value: `API-Key`
+
+> 零一万物[Yi大模型](https://platform.lingyiwanwu.com/docs)
+
+| model              | config                       | price                                          |
+|--------------------|------------------------------|------------------------------------------------|
+| `yi-large`         | YiLargeGenerateConfig        | [price](https://platform.lingyiwanwu.com/docs) |
+| `yi-medium`        | YiMediumGenerateConfig       | [price](https://platform.lingyiwanwu.com/docs) |
+| `yi-medium-200k`   | YiMedium200KGenerateConfig   | [price](https://platform.lingyiwanwu.com/docs) |
+| `yi-spark`         | YiSparkGenerateConfig        | [price](https://platform.lingyiwanwu.com/docs) |
+| `yi-large-rag`     | YiLargeRAGGenerateConfig     | [price](https://platform.lingyiwanwu.com/docs) |
+| `yi-large-turbo`   | YiLargeTurboGenerateConfig   | [price](https://platform.lingyiwanwu.com/docs) |
+| `yi-large-preview` | YiLargePreviewGenerateConfig | [price](https://platform.lingyiwanwu.com/docs) |
+
+> 调用示例
+
+```python
+from zlai.llms import Yi
+from zlai.llms.generate_config.yi import *
+
+models = [
+    YiLargeGenerateConfig,
+    YiMediumGenerateConfig,
+    YiMedium200KGenerateConfig,
+    YiSparkGenerateConfig,
+    YiLargeRAGGenerateConfig,
+    YiLargeTurboGenerateConfig,
+    YiLargePreviewGenerateConfig,
+]
+
+for gen_config in models:
+    llm = Yi(generate_config=gen_config())
+    data = llm.generate(query="1+1=")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+YiLarge: 1 + 1 = 2
+YiMedium: 1+1 equals 2.
+YiMedium200K: I'm sorry, but I can only provide assistance and information. It seems like you might have encountered an error or a glitch in your input. If you need help with something specific, please let me know how I can assist you!
+YiSpark: 1+1 equals 2.
+YiLargeRAG: 1 + 1 = 2
+YiLargeTurbo: 1 + 1 = 2
+YiLargePreview: 1 + 1 = 2<issue_start>
+```
+
+## MoonShot
+
+> 配置API-Key
+
+- API Key Name: `MOONSHOT_API_KEY`
+- Value: `API-Key`
+
+> 月之暗面[MoonShot大模型](https://platform.moonshot.cn/docs)
+
+| model              | config                  | price                                                    |
+|--------------------|-------------------------|----------------------------------------------------------|
+| `moonshot-v1-8k`   | SparkLiteGenerateConfig | [price](https://platform.moonshot.cn/docs/price/pricing) |
+| `moonshot-v1-32k`  | SparkLiteGenerateConfig | [price](https://platform.moonshot.cn/docs/price/pricing) |
+| `moonshot-v1-128k` | SparkLiteGenerateConfig | [price](https://platform.moonshot.cn/docs/price/pricing) |
+
+> 调用示例
+
+```python
+from zlai.llms import MoonShot
+from zlai.llms.generate_config.moonshot import *
+
+models = [
+    MoonShot8KV1GenerateConfig,
+    MoonShot32KV1GenerateConfig,
+    MoonShot128KV1GenerateConfig,
+]
+
+for gen_config in models:
+    llm = MoonShot(generate_config=gen_config())
+    data = llm.generate(query="1+1=")
+    print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+    print()
+```
+
+*输出*
+
+```text
+MoonShot8KV1: 1+1等于2。这是一个基本的数学加法运算。
+MoonShot32KV1: 1+1 equals 2. This is a basic arithmetic operation where you add the two numbers together.
+MoonShot128KV1: 1+1等于2。这是基本的数学加法运算。
+```
+
+## End
+
 -----
-@2024/06/26
+@2024/07/01

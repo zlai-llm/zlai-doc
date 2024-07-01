@@ -1,5 +1,5 @@
 - [首页]()
-
+* [**Quick Start**](quick_start.md)
 * **LLM**
   * [线上大模型](llm/zlai-llm-01.md)
   * [大模型调用的便捷方法](llm/zlai-llm-02.md)

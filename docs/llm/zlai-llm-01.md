@@ -30,7 +30,7 @@
 > 环境变量的配置方式
 
 <center>
-<img src="../img/zlai-llm-01.png" width="480px">
+<img src="./img/zlai-llm-01.png" width="480px">
 </center>
 
 以下是一些大模型调用示例。

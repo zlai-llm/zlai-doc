@@ -1,7 +1,7 @@
 # ZLAI[再来]-Document
 
 <center>
-<img src="docs/img/zlai-icon/03.png" width="100%" height="270px">
+<img src="docs/img/zlai-icon/03.png" width="270px" height="270px">
 <h5>ZLAI Make Agent Fly.</h5>
 </center>
 

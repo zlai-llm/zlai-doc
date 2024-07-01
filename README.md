@@ -1,5 +1,10 @@
 # ZLAI[再来]-Document
 
+<center>
+<img src="./img/zlai-icon/07.svg" width="100%" height="270px">
+<h5>ZLAI Make Agent Fly.</h5>
+</center>
+
 > 简单易学的大模型学习手册
 
 - 丰富的RAG与Agent工具链路
@@ -14,6 +19,6 @@
 > 讨论群
 
 <center>
-<img src="docs/img/wechat-group.jpg" width="200px">
+<img src="docs/img/wechat.jpg" width="150px">
 <h5>微信群</h5>
 </center>

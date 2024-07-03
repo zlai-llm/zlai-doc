@@ -37,6 +37,13 @@
 
 ## ZhipuAI
 
+> 官方信息
+
+[获取API-Key](https://bigmodel.cn/usercenter/apikeys) /
+[文档](https://bigmodel.cn/dev/api) /
+[Playground](https://bigmodel.cn/trialcenter) /
+[定价信息](https://open.bigmodel.cn/pricing)
+
 > 配置API-Key
 
 - API Key Name: `ZHIPU_API_KEY`
@@ -162,6 +169,13 @@ print(completion.choices[0].message.content)
 | `glm-3-turbo` | `GLM3TurboGenerateConfig()` | 以官网为准 |
 
 ## Ali
+
+> 官方信息
+
+[获取API-Key](https://dashscope.console.aliyun.com/apiKey) /
+[文档](https://help.aliyun.com/zh/dashscope/developer-reference) /
+[Playground](https://dashscope.console.aliyun.com/playground) /
+[定价信息](https://dashscope.console.aliyun.com/billing)
 
 > 配置API-Key
 
@@ -398,6 +412,13 @@ Yi15Chat6B: 你好！有什么我可以帮助你的吗？
 
 ## Baichuan
 
+> 官方信息
+
+[获取API-Key](https://platform.baichuan-ai.com/console/apikey) /
+[文档](https://platform.baichuan-ai.com/docs/api) /
+[Playground](https://platform.baichuan-ai.com/playground) /
+[定价信息](https://platform.baichuan-ai.com/price)
+
 > 配置API-Key
 
 - API Key Name: `BAICHUAN_API_KEY`
@@ -449,6 +470,12 @@ Baichuan2Turbo192k: 你好，有什么我可以帮助你的吗？
 ```
 
 ## DeepSeek
+
+> 官方信息
+
+[获取API-Key](https://platform.deepseek.com/api_keys) /
+[文档](https://platform.deepseek.com/api-docs/zh-cn/) /
+[定价信息](https://platform.deepseek.com/api-docs/zh-cn/pricing)
 
 > 配置API-Key
 
@@ -588,6 +615,14 @@ ep-20240630095730-6c7sc : 在常规的数学运算中，1+1=2。但在一些情�
 ```
 
 ## Spark
+
+> 官方信息
+
+[先创建应用](https://console.xfyun.cn/app/myapp)
+[获取API-Key](https://console.xfyun.cn/services/cbm) /
+[文档](https://www.xfyun.cn/doc/spark/Web.html) /
+[Playground](https://console.xfyun.cn/services/sparkapiCenter) /
+[定价信息](https://xinghuo.xfyun.cn/sparkapi)
 
 > 配置API-Key
 
@@ -742,6 +777,12 @@ YiLargePreview: 1 + 1 = 2<issue_start>
 
 ## MoonShot
 
+> 官方信息
+
+[获取API-Key](https://platform.moonshot.cn/console/api-keys) /
+[文档](https://platform.moonshot.cn/docs) /
+[定价信息](https://platform.moonshot.cn/docs/price/chat)
+
 > 配置API-Key
 
 - API Key Name: `MOONSHOT_API_KEY`
@@ -781,6 +822,73 @@ MoonShot8KV1: 1+1等于2。这是一个基本的数学加法运算。
 MoonShot32KV1: 1+1 equals 2. This is a basic arithmetic operation where you add the two numbers together.
 MoonShot128KV1: 1+1等于2。这是基本的数学加法运算。
 ```
+
+## StepFun
+
+> 官方信息
+
+[获取API-Key](https://platform.stepfun.com/interface-key) /
+[文档](https://platform.stepfun.com/docs/overview/concept) /
+[定价信息](https://platform.stepfun.com/docs/pricing/details)
+
+> 配置API-Key
+
+- API Key Name: `STEPFUN_API_KEY`
+- Value: `API-Key`
+
+> 阶跃星辰[Step Fun大模型](https://platform.stepfun.com/)
+
+| model         | config                   | remark      |
+|---------------|--------------------------|-------------|
+| `step-1-8k`   | Step8KV1GenerateConfig   | 超高性价比系列     |
+| `step-1-32k`  | Step32KV1GenerateConfig  | 超高性价比系列     |
+| `step-v1-8k`  | Step1V8KGenerateConfig   | -           |
+| `step-v1-32k` | Step1V32KGenerateConfig  | -           |
+| `step-1-128k` | Step128KV1GenerateConfig | 超长上下文系列     |
+| `step-1-256k` | Step256KV1GenerateConfig | 超长上下文系列     |
+
+> 调用示例
+
+```python
+from zlai.llms.step_fun import *
+from zlai.llms.generate_config.step_fun import *
+
+def test_loop_config(self):
+    """"""
+    config = [
+        Step8KV1GenerateConfig,
+        Step32KV1GenerateConfig,
+        Step1V8KGenerateConfig,
+        Step1V32KGenerateConfig,
+        Step128KV1GenerateConfig,
+        Step256KV1GenerateConfig,
+    ]
+    for gen_config in config:
+        llm = StepFun(generate_config=gen_config())
+        data = llm.generate(query="你好")
+        print(f"{gen_config.__name__.replace('GenerateConfig', '')}: {data.choices[0].message.content}")
+        print()
+```
+
+*输出*
+
+```text
+Step8KV1: 你好！今天有什么我可以帮助你的吗？如果你有任何问题或需要一些建议，我会尽力帮助你。如果你只是想聊天，那也很好！我很乐意听你说话。
+Step32KV1: 你好！今天有什么我可以帮你的吗？如果你有任何问题或需要一些建议，我会尽力帮助你。如果你只是想聊天，那也很好！我很乐意听你说话。
+Step1V8K: 你好！今天我能为您做些什么？
+Step1V32K: 你好！今天我能为您做些什么？
+Step128KV1: 你好！今天我能为你做些什么？如果你有任何问题或需要帮助，请随时告诉我。
+Step256KV1: 你好！很高兴认识你。如果你有任何问题或需要帮助，请随时告诉我。我会尽力为你提供信息和支持。
+```
+
+## MiniMax(施工中...)
+
+> 官方信息
+
+[获取API-Key](https://platform.minimaxi.com/user-center/basic-information/interface-key) /
+[文档](https://platform.minimaxi.com/document/notice) /
+[Playground](https://platform.minimaxi.com/examination-center/text-experience-center) /
+[定价信息](https://platform.minimaxi.com/document/price)
 
 ## End
 

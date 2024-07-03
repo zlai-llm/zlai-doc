@@ -152,3 +152,5 @@ print(completion.choices[0].message.content)
 
 ----
 @2024/07/01
+
+todo: 完善Agent之后的部分

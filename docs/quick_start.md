@@ -36,7 +36,25 @@
 ## 如何安装？
 
 ```bash
-pip install zlai -U
+# [推荐] 安装最新版本ZLAI的所有模块
+pip install zlai[all] -U
+# [推荐] 最轻量化安装
+pip install zlai[tiny] -U
+# [推荐] 安装全部大模型API依赖
+pip install zlai[api] -U
+```
+
+```bash
+# [echarts] 安装了 echarts 模块
+pip install zlai[echarts] -U
+# [vector_db] 安装了向量数据库模块
+pip install zlai[vector_db] -U
+# [langchain] 安装了 langchain 模块
+pip install zlai[langchain] -U
+# [database] 安装了数据库相关模块
+pip install zlai[database] -U
+# [streamlit] 安装了 streamlit 模块
+pip install zlai[streamlit] -U
 ```
 
 您也可以在[GitHub](https://github.com/zlai-llm/zlai.git)/[PyPi](https://pypi.org/project/zlai/)查看最新代码与最新发行版本。

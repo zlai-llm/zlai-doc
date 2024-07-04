@@ -30,6 +30,19 @@
 
 在该文档的介绍中，您将详细了解大模型开发的方方面面，包含理论、实验、案例，相信您在后续的阅读中会有更多的收获。
 
+> 安装
+
+```bash
+# [推荐] 安装最新版本ZLAI的所有模块
+pip install zlai[all] -U
+# [推荐] 最轻量化安装
+pip install zlai[tiny] -U
+# [推荐] 安装全部大模型API依赖
+pip install zlai[api] -U
+```
+
+> 讨论
+
 <center>
 <img src="./img/wechat.jpg" width="180px">
 <h6>Fig. Wechat-Group</h6>

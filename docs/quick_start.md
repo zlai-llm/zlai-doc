@@ -8,6 +8,7 @@
 [![Python](https://img.shields.io/pypi/pyversions/zlai.svg)](https://pypi.python.org/pypi/zlai/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/zlai)](https://pypi.org/project/zlai/)
 [![GitHub star chart](https://img.shields.io/github/stars/zlai-llm/zlai?style=flat-square)](https://star-history.com/#zlai-llm/zlai)
+[![GitHub Forks](https://img.shields.io/github/forks/zlai-llm/zlai.svg)](https://star-history.com/#zlai-llm/zlai)
 [![Doc](https://img.shields.io/badge/Doc-online-green)](https://zlai-llm.github.io/zlai-doc/)
 [![Issue](https://img.shields.io/github/issues/zlai-llm/zlai)](https://github.com/zlai-llm/zlai/issues/new/choose)
 [![Discussions](https://img.shields.io/github/discussions/zlai-llm/zlai)](https://github.com/zlai-llm/zlai/issues/new/choose)

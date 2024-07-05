@@ -2,10 +2,12 @@
 
 ----
 
+
 [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)
 [![Python](https://img.shields.io/pypi/pyversions/zlai.svg)](https://pypi.python.org/pypi/zlai/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/zlai)](https://pypi.org/project/zlai/)
 [![GitHub star chart](https://img.shields.io/github/stars/zlai-llm/zlai?style=flat-square)](https://star-history.com/#zlai-llm/zlai)
+[![GitHub Forks](https://img.shields.io/github/forks/zlai-llm/zlai.svg)](https://star-history.com/#zlai-llm/zlai)
 [![Doc](https://img.shields.io/badge/Doc-online-green)](https://zlai-llm.github.io/zlai-doc/)
 [![Issue](https://img.shields.io/github/issues/zlai-llm/zlai)](https://github.com/zlai-llm/zlai/issues/new/choose)
 [![Discussions](https://img.shields.io/github/discussions/zlai-llm/zlai)](https://github.com/zlai-llm/zlai/issues/new/choose)
@@ -40,6 +42,10 @@ pip install zlai[tiny] -U
 # [推荐] 安装全部大模型API依赖
 pip install zlai[api] -U
 ```
+
+> Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=zlai-llm/zlai&type=Date)](https://star-history.com/#zlai-llm/zlai&Date)
 
 > 讨论
 

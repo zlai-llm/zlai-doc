@@ -8,12 +8,12 @@
 
 优先级 [⭐]
 
-- 增加天工API
-- 增加MiniMax
-- 增加ChatGPT
-- 增加Azure OpenAI
-- 增加Gimini
-- 增加商汤大模型
+- [ ] 增加天工API
+- [ ] 增加MiniMax
+- [ ] 增加ChatGPT
+- [ ] 增加Azure OpenAI
+- [ ] 增加Gimini
+- [ ] 增加商汤大模型
 
 > `zlai/agent`
 
@@ -38,7 +38,11 @@
 
 ### DOC
 
-1. 增加对于`Agent`的文档
+- [ ] 增加对于`Agent`的文档
+
+### Streamlit
+
+- [ ] 增加对于`Agent`的Streamlit支持
 
 ## 已发版本
 

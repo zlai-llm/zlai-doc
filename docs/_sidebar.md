@@ -47,6 +47,7 @@
   * [向量数据库milvus](embedding/milvus.md)
 * **RAG**
   * [RAG](rag/zlai-rag-01.md)
+  * [GraphRAG](rag/graph_rag.md)
 * **Parse**
   * [document](parse/zlai-document.md)
   * [parse](parse/zlai-parse-01.md)

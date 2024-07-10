@@ -1,7 +1,8 @@
+<div align="center">
+
 # ZLAI
 
 ----
-
 
 [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)
 [![Python](https://img.shields.io/pypi/pyversions/zlai.svg)](https://pypi.python.org/pypi/zlai/)
@@ -18,6 +19,8 @@
 <img src="./img/zlai-icon/07.svg" width="100%" height="270px">
 <h5>ZLAI Make Agent Fly.</h5>
 </center>
+
+</div>
 
 > 这里是ZLAI的项目文档，ZLAI（`再来`）是一个致力于大模型开发的工具箱。
 

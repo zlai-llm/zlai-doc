@@ -52,10 +52,14 @@ pip install zlai[api] -U
 
 > 讨论
 
+<div align="center">
+
 <center>
 <img src="./img/wechat.jpg" width="180px">
 <h6>Fig. Wechat-Group</h6>
 </center>
+
+</div>
 
 *我们有一个微信群，这里可以更方便的沟通有关方面的技术问题。期待您的优秀建议。*
 

@@ -35,9 +35,15 @@
 2. 增加图文问答与图文生成。
 3. 增加Agent-API集成。
 
+<div align="center">
+
 > 讨论群
 
 <center>
 <img src="docs/img/wechat.jpg" width="150px">
 <h5>微信群</h5>
 </center>
+
+</div>
+
+------

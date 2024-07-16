@@ -167,6 +167,7 @@ print(completion.choices[0].message.content)
 | `glm-4-airx`  | `GLM4AirXGenerateConfig()`  | 以官网为准 |
 | `glm-4-flash` | `GLM4FlashGenerateConfig()` | 以官网为准 |
 | `glm-3-turbo` | `GLM3TurboGenerateConfig()` | 以官网为准 |
+| `codegeex-4`  | `CodeGeexGenerateConfig()`  | 以官网为准 |
 
 ## Ali
 

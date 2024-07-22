@@ -1,6 +1,6 @@
 # 大模型调用其他方法
 
-> 这里展示的模型方法适用于`zlai`封装的全部在线大模型或本地大模型，但由于篇幅所限这里仅以`智谱AI`的`ZhipuGLM3Turbo`作为示例。
+> 这里展示的模型方法适用于`zlai`封装的全部在线大模型或本地大模型，但由于篇幅所限这里仅以`智谱AI`的`GLM4AirGenerateConfig`作为示例。
 
 ## 模型输出数据类型
 
@@ -11,9 +11,9 @@
 > 默认情况下，全量输出`completion`信息
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 completion = llm.generate(query="你好")
 print(completion)
 ```
@@ -29,11 +29,11 @@ model='glm-3-turbo' created=1714271348 choices=[CompletionChoice(index=0, finish
 > 指定`output="message"`，返回`Message`消息
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
 llm = Zhipu(
     output="message",                # 以message消息形式输出
-    generate_config=ZhipuGLM3Turbo()
+    generate_config=GLM4AirGenerateConfig()
 )
 message = llm.generate(query="你好")
 print(message)
@@ -52,11 +52,11 @@ content='你好👋！我是人工智能助手智谱清言（ChatGLM），很高
 > 指定`output="str"`，返回回答的文本信息
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
 llm = Zhipu(
     output="str",                    # 以str形式输出
-    generate_config=ZhipuGLM3Turbo()
+    generate_config=GLM4AirGenerateConfig()
 )
 content = llm.generate(query="你好")
 print(content)
@@ -79,9 +79,9 @@ print(content)
 > 代码示例
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 # 创建大模型
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 completion = llm.generate(query="你好")
 
 print(completion.choices[0].message.content)
@@ -142,11 +142,11 @@ messages = [
 > 在构造了`Messages`后，如何进行`Message`推理？
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 from zlai.schema import SystemMessage, UserMessage, AssistantMessage
 
 # 创建大模型
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
 messages = [
     SystemMessage(content="你是一个人工智能助手"),
@@ -175,11 +175,11 @@ print(completion.choices[0].message.content)
 > 使用示例
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 from zlai.schema import UserMessage
 
 # 创建模型推理配置，并指定stream=True
-generate_config = ZhipuGLM3Turbo(stream=True)
+generate_config = GLM4AirGenerateConfig(stream=True)
 
 # 创建大模型
 llm = Zhipu(generate_config=generate_config)
@@ -270,9 +270,9 @@ for response in responses:
 > 使用方式-1: 给定`parse_dict`
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
 question = """
 文本：张三在杭州吃了一笼小笼包。
@@ -300,13 +300,13 @@ print(f"解析结果: {output[0]}")
 > 使用方式-2: 自定义解析函数。
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
 def udf_parse(string):
   """自定义解析函数"""
   return eval(string)
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
 question = """
 文本：张三在杭州吃了一笼小笼包。
@@ -345,9 +345,9 @@ print(f"解析结果: {output[0]}")
 > 调用示例
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
 question_1 = """
 文本：张三在杭州吃了一笼小笼包。
@@ -380,9 +380,9 @@ for completion in output:
 > 使用方式-1: 给定`parse_dict`
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
 question_1 = """
 文本：张三在杭州吃了一笼小笼包。
@@ -415,13 +415,13 @@ for output in outputs:
 > 使用方式-2: 自定义解析函数。
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4AirGenerateConfig
 
 def udf_parse(string):
   """自定义解析函数"""
   return eval(string)
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4AirGenerateConfig())
 
 question_1 = """
 文本：张三在杭州吃了一笼小笼包。

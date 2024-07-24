@@ -124,13 +124,13 @@ TaskDescription(
 
 ```python
 from zlai.schema import SystemMessage
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4GenerateConfig
 from zlai.agent import TaskParameters
 
 system_message = SystemMessage(content="""You are a helpful assistant.""")
 
 task_parameters = TaskParameters(
-    llm=Zhipu(generate_config=ZhipuGLM3Turbo()),
+    llm=Zhipu(generate_config=GLM4GenerateConfig()),
     system_message=system_message,
 )
 
@@ -205,14 +205,13 @@ TaskParameters(
 ```python
 from zlai.llms import *
 from zlai.agent import *
-from zlai.agent.prompt.tasks import *  # 0.3.45 后的版本不需要引入
 
 task_weather = [
     TaskDescription(
         task=AddressAgent, task_id=0, task_name="地址解析机器人",
         task_description="""可以帮助你解析文本中的地址信息，并返回标准地址字段信息。""",
         task_parameters=TaskParameters(
-            llm=Zhipu(generate_config=ZhipuGLM3Turbo()),
+            llm=Zhipu(generate_config=GLM4GenerateConfig()),
             verbose=True,
         )
     ),
@@ -220,7 +219,7 @@ task_weather = [
         task=WeatherAgent, task_id=1, task_name="天气播报机器人",
         task_description="""提供具体的地址信息后可以帮助你查询当地的天气情况，必须提供标准地址。""",
         task_parameters=TaskParameters(
-            llm=Zhipu(generate_config=ZhipuGLM3Turbo()),
+            llm=Zhipu(generate_config=GLM4GenerateConfig()),
             verbose=True,
         )
     ),
@@ -245,7 +244,6 @@ task_seq = TaskSequence(task_list=task_weather, verbose=True)
 from typing import *
 from zlai.llms import *
 from zlai.agent import *
-from zlai.agent.prompt.tasks import *  # 0.3.45 后的版本不需要引入
 
 class Weather(TaskSequence):
     """"""
@@ -386,7 +384,7 @@ Task Sequence End.
 **Method-1**: **使用`TaskSwitch`给定`tasks`任务列表即可，我们推荐使用这种更简洁的方式定义任务流程。** 下面是定义示例：
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4GenerateConfig
 from zlai.agent import TaskSwitch, TaskDescription, ChatAgent, Weather
 
 task_switch_list = [
@@ -400,7 +398,7 @@ task_switch_list = [
     ),
 ]
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4GenerateConfig())
 chat = TaskSwitch(llm=llm, task_list=task_switch_list, verbose=True)
 ```
 

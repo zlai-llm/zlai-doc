@@ -71,6 +71,8 @@ print(models_list.data)
 
 ## 模型请求
 
+### Normal Completion
+
 ```python
 from openai import OpenAI
 
@@ -91,11 +93,46 @@ print(completion.choices[0].message.content)
 你好👋！很高兴见到你，有什么可以帮助你的吗？
 ```
 
-## Function Call
+### Stream Completion
 
 ```python
 from openai import OpenAI
 
+client = OpenAI(api_key="EMPTY", base_url="http://localhost:8000")
+completion = client.chat.completions.create(
+    model="glm-4-9b-chat",
+    messages=[
+        {"role": "user", "content": "你好"},
+    ],
+    stream=True
+)
+
+answer = ""
+for chunk in completion:
+    content = chunk.choices[0].delta.content
+    answer += content
+    print(answer)
+```
+
+*输出*
+
+```text
+你好
+你好👋！很高兴
+你好👋！很高兴见到
+你好👋！很高兴见到你
+你好👋！很高兴见到你，有什么
+你好👋！很高兴见到你，有什么可以帮助
+你好👋！很高兴见到你，有什么可以帮助你的
+你好👋！很高兴见到你，有什么可以帮助你的吗
+你好👋！很高兴见到你，有什么可以帮助你的吗？ 
+```
+
+## Function Call
+
+> tools example
+
+```python
 tools = [
     {
         "type": "function",
@@ -120,6 +157,16 @@ tools = [
         }
     },
 ]
+```
+
+### Normal Function Call
+
+#### Function Call
+
+> code
+
+```python
+from openai import OpenAI
 
 client = OpenAI(api_key="EMPTY", base_url="http://localhost:8000")
 completion = client.chat.completions.create(
@@ -143,17 +190,203 @@ get_current_weather
 {"location": "San Francisco, CA", "format": "celsius"}
 ```
 
-> 已经通过测试的模型列表
+#### Call Function
+
+```python
+from zlai.types.messages import ToolMessage
+
+messages=[
+    UserMessage(content="What's the Celsius temperature in San Francisco?"),
+    completion.choices[0].message,
+    ToolMessage(content="{San Francisco, CA: {celsius: 15}}"),
+]
+
+completion = client.chat.completions.create(
+    model="glm-4-9b-chat", messages=messages,
+    tools=tools, tool_choice="auto", stream=False,
+)
+```
+
+*输出*
+
+```text
+The current Celsius temperature in San Francisco is 15 degrees.
+```
+
+### Stream Function Call
+
+#### Function Call
+
+> code
+
+```python
+from openai import OpenAI
+
+client = OpenAI(api_key="EMPTY", base_url="http://192.168.98.240:8000")
+completion = client.chat.completions.create(
+    model="glm-4-9b-chat",
+    messages=[
+        {"role": "user", "content": "What's the Celsius temperature in San Francisco?"},
+    ],
+    tools=tools,
+    tool_choice="auto",
+    stream=True,
+)
+
+answer = ""
+for chunk in completion:
+    content = chunk.choices[0].delta.content
+    if content:
+        answer += content
+        print(answer)
+```
+
+*输出*
+
+```text
+ get_current_weather
+
+ get_current_weather
+{"location": 
+ get_current_weather
+{"location": "San 
+ get_current_weather
+{"location": "San Francisco, 
+ get_current_weather
+{"location": "San Francisco, CA", 
+ get_current_weather
+{"location": "San Francisco, CA", "format": 
+ get_current_weather
+{"location": "San Francisco, CA", "format": "celsius"} 
+```
+
+> Function Call Parameters
+
+```python
+print("content: ", chunk.choices[0].delta.content)
+if chunk.choices[0].delta.tool_calls:
+    print("function name: ", chunk.choices[0].delta.tool_calls[0].function.name)
+    print("function arguments: ", chunk.choices[0].delta.tool_calls[0].function.arguments)
+```
+
+*输出*
+
+```text
+content:  None
+function name:  get_current_weather
+function arguments:  {"location": "San Francisco, CA", "format": "celsius"}
+```
+
+#### Call Function
+
+```python
+from zlai.types.messages import ToolMessage
+
+messages=[
+    UserMessage(content="What's the Celsius temperature in San Francisco?"),
+    completion.choices[0].message,
+    ToolMessage(content="{San Francisco, CA: {celsius: 15}}"),
+]
+
+completion = client.chat.completions.create(
+    model="glm-4-9b-chat", messages=messages, tools=tools, 
+    tool_choice="auto", stream=True, 
+)
+
+answer = ""
+for chunk in completion:
+    content = chunk.choices[0].delta.content
+    if content:
+        answer += content
+        print(answer)
+```
+
+*输出*
+
+```text
+The 
+The current 
+The current Celsius 
+The current Celsius temperature 
+The current Celsius temperature in 
+The current Celsius temperature in San 
+The current Celsius temperature in San Francisco 
+The current Celsius temperature in San Francisco is 
+The current Celsius temperature in San Francisco is 15  
+The current Celsius temperature in San Francisco is 15 degrees. 
+```
+
+## 多模态模型
+
+**Example**: `glm-4v-9b`
+
+### Normal Completion
+
+```python
+from openai import OpenAI
+from zlai.types.messages import ImageMessage, UserMessage, AssistantMessage
+
+messages = [
+    ImageMessage(content="解析图片中的文字").add_image(url="https://pic2.zhimg.com/v2-70ea697c0edec518b9d513a49228e489_b.jpg"),
+]
+messages = [message.model_dump() for message in messages]
+
+client = OpenAI(api_key="EMPTY", base_url="http://192.168.98.240:8000")
+completion = client.chat.completions.create(
+    model="glm-4v-9b",
+    messages=messages,
+)
+print(completion.choices[0].message.content)
+```
+
+*输出*
+
+```text
+图片中的文字有“悦享先锋”、“B级先锋猎装SUV”、“宋L”和“知乎@七万钣金中里毅”。
+
+- “悦享先锋”和“B级先锋猎装SUV”是宋L这款车的宣传语，突出了其作为一款B级先锋猎装SUV的特点。
+- “宋L”是这款车的名称。
+- “知乎@七万钣金中里毅”可能是图片来源或作者的标注。
+```
+
+### Stream Comletion
+
+```python
+from openai import OpenAI
+
+client = OpenAI(api_key="EMPTY", base_url="http://192.168.98.240:8000")
+completion = client.chat.completions.create(
+    model="glm-4v-9b",
+    messages=messages,
+    stream=True,
+)
+
+answer = ""
+for chunk in completion:
+    content = chunk.choices[0].delta.content
+    answer += content
+print(answer)
+```
+
+*输出*
+
+```text
+图片中的文字有“悦享先锋”、“B级先锋猎装SUV”、“宋L”和“知乎@七万钣金中里毅”。
+
+其中，“悦享先锋”和“B级先锋猎装SUV”是宋L这款车的宣传语，突出了这款车的特点和定位；“宋L”是这款车的名称；“知乎@七万钣金中里毅”可能是图片来源或作者的标注。 
+```
+
+## 已经通过测试的模型列表
 
 | 系列    | 模型                                | 普通推理 | 流式推理 | FunctionCall |
 |-------|-----------------------------------|------|------|--------------|
-| Qwen2 | Qwen2-0.5B-Instruct               | 通过   | 通过   | 暂不支持         |
-| Qwen2 | Qwen2-1.5B-Instruct               | 通过   | 通过   | 暂不支持         |
-| Qwen2 | Qwen2-7B-Instruct                 | 通过   | 通过   | 暂不支持         |
-| Qwen2 | Qwen2-57B-A14B-Instruct-GPTQ-Int4 | 通过   | 通过   | 暂不支持         |
-| GLM4  | glm-4-9b-chat                     | 通过   | 暂不支持 | 通过           |
-| GLM4  | glm-4-9b-chat-1m                  | 通过   | 暂不支持 | 通过           |
-| GLM4  | glm-4v-9b                         | 通过   | 暂不支持 | 通过           |
+| Qwen2 | Qwen2-0.5B-Instruct               | ✔️   | ✔️   | 暂不支持         |
+| Qwen2 | Qwen2-1.5B-Instruct               | ✔️   | ✔️   | 暂不支持         |
+| Qwen2 | Qwen2-7B-Instruct                 | ✔️   | ✔️   | 暂不支持         |
+| Qwen2 | Qwen2-57B-A14B-Instruct-GPTQ-Int4 | ✔️   | ✔️   | 暂不支持         |
+| GLM4  | glm-4-9b-chat                     | ✔️   | ✔️   | ✔️           |
+| GLM4  | glm-4-9b-chat-1m                  | ✔️   | ✔️   | ✔️           |
+| GLM4  | glm-4v-9b                         | ✔️   | ✔️   | ✔️           |
 
 ## End
 

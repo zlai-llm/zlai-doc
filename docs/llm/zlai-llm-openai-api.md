@@ -319,6 +319,7 @@ The current Celsius temperature in San Francisco is 15 degrees.
 ## 多模态模型
 
 **Example**: `glm-4v-9b`
+**Image**: [Image](https://pic2.zhimg.com/v2-70ea697c0edec518b9d513a49228e489_b.jpg)
 
 ### Normal Completion
 

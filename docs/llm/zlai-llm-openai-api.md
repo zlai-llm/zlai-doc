@@ -16,9 +16,9 @@
 | 对话        | GLM4    | [glm-4-9b-chat-1m](https://huggingface.co/THUDM/glm-4-9b-chat-1m)                                  | ✔️   | ✔️   | ✔️           |
 | 多模态       | GLM4    | [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)                                                | ✔️   | ✔️   | ✔️           |
 | 多模态       | MiniCPM | [MiniCPM-V-2_6](https://huggingface.co/openbmb/MiniCPM-V-2_6)                                      | ✔️   | ✔️   | ✔️           |
-| 文生图       | Kolors  | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                            | ✔️   | ✔️   | ✔️           |
-| 图生图       | Kolors  | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                          | ✔️   | ✔️   | ✔️           |
-| Embedding | BGE     | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                       | ✔️   | ✔️   | ✔️           |
+| 文生图       | Kolors  | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                            | ✔️   | ❌    | ❌            |
+| 图生图       | Kolors  | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                          | ✔️   | ❌    | ❌            |
+| Embedding | BGE     | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                       | ✔️   | ❌    | ❌            |
 
 ## 部署方式
 

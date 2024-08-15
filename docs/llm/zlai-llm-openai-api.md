@@ -6,19 +6,20 @@
 
 > [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)支持部署以下模型（对话、多模态、文生图、图生图、Embedding），并且已经通过`OpenAI-SDK`测试，可以正常使用。
 
-| 类型        | 系列      | 模型                                                                                                 | 普通推理 | 流式推理 | FunctionCall |
-|-----------|---------|----------------------------------------------------------------------------------------------------|------|------|--------------|
-| 对话        | Qwen2   | [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)                             | ✔️   | ✔️   | 暂不支持         |
-| 对话        | Qwen2   | [Qwen2-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2-1.5B-Instruct)                             | ✔️   | ✔️   | 暂不支持         |
-| 对话        | Qwen2   | [Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)                                 | ✔️   | ✔️   | 暂不支持         |
-| 对话        | Qwen2   | [Qwen2-57B-A14B-Instruct-GPTQ-Int4](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct-GPTQ-Int4) | ✔️   | ✔️   | 暂不支持         |
-| 对话        | GLM4    | [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat)                                        | ✔️   | ✔️   | ✔️           |
-| 对话        | GLM4    | [glm-4-9b-chat-1m](https://huggingface.co/THUDM/glm-4-9b-chat-1m)                                  | ✔️   | ✔️   | ✔️           |
-| 多模态       | GLM4    | [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)                                                | ✔️   | ✔️   | ✔️           |
-| 多模态       | MiniCPM | [MiniCPM-V-2_6](https://huggingface.co/openbmb/MiniCPM-V-2_6)                                      | ✔️   | ✔️   | ✔️           |
-| 文生图       | Kolors  | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                            | ✔️   | ❌    | ❌            |
-| 图生图       | Kolors  | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                          | ✔️   | ❌    | ❌            |
-| Embedding | BGE     | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                       | ✔️   | ❌    | ❌            |
+| 类型         | 系列        | 模型                                                                                                 | 普通推理 | 流式推理 | FunctionCall |
+|------------|-----------|----------------------------------------------------------------------------------------------------|------|------|--------------|
+| 对话         | Qwen2     | [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)                             | ✔️   | ✔️   | 暂不支持         |
+| 对话         | Qwen2     | [Qwen2-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2-1.5B-Instruct)                             | ✔️   | ✔️   | 暂不支持         |
+| 对话         | Qwen2     | [Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)                                 | ✔️   | ✔️   | 暂不支持         |
+| 对话         | Qwen2     | [Qwen2-57B-A14B-Instruct-GPTQ-Int4](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct-GPTQ-Int4) | ✔️   | ✔️   | 暂不支持         |
+| 对话         | GLM4      | [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat)                                        | ✔️   | ✔️   | ✔️           |
+| 对话         | GLM4      | [glm-4-9b-chat-1m](https://huggingface.co/THUDM/glm-4-9b-chat-1m)                                  | ✔️   | ✔️   | ✔️           |
+| 多模态        | GLM4      | [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)                                                | ✔️   | ✔️   | ✔️           |
+| 多模态        | MiniCPM   | [MiniCPM-V-2_6](https://huggingface.co/openbmb/MiniCPM-V-2_6)                                      | ✔️   | ✔️   | ✔️           |
+| 文生图        | Kolors    | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                            | ✔️   | ❌    | ❌            |
+| 图生图        | Kolors    | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                          | ✔️   | ❌    | ❌            |
+| 文字转语音`TTS` | CosyVoice | [CosyVoice-300M](https://huggingface.co/FunAudioLLM/CosyVoice-300M)                                | ✔️   | ❌    | ❌            |
+| Embedding  | BGE       | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                       | ✔️   | ❌    | ❌            |
 
 ## 部署方式
 
@@ -557,6 +558,35 @@ print(response.data[0].embedding[:5])
 Usage(prompt_tokens=0, total_tokens=2)
 [-0.037132877856492996, 0.006196103058755398, -0.06525908410549164, -0.02504667080938816, -0.016926351934671402]
 ```
+
+## Audio
+
+> 文字转语音 `TTS(text to speech)`
+
+### TTS
+
+> `voice`: 音色有`['中文女', '中文男', '日语男', '粤语女', '英文女', '英文男', '韩语女']`
+
+```python
+from openai import OpenAI
+client = OpenAI(api_key="EMPTY", base_url="http://localhost:8000")
+
+text = """
+有时,我会静静地坐在庭院里,看着落叶飘飞,感慨万千。青春无痕,日子如白驹过隙。
+我们曾经多么明朗且无忧无虑,如今却逐渐变得沧桑和迷惘。生命像一朵花,明明灿烂地绽放,最终却也枯萎凋谢。
+"""
+
+speech_file_path = "./audio.wav"
+response = client.audio.speech.create(model="CosyVoice-300M-SFT", voice="中文女", input=text)
+
+response.stream_to_file(speech_file_path)
+```
+
+*输出*
+
+<audio controls>
+  <source src="audio/audio.wav" type="audio/mpeg">
+</audio>
 
 ## End
 

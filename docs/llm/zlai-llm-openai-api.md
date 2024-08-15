@@ -4,7 +4,7 @@
 
 ## 已经通过测试的模型列表
 
-> [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)支持部署以下模型（对话、多模态、文生图、图生图、Embedding），并且已经通过`OpenAI-SDK`测试，可以正常使用。
+> [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)支持部署以下模型（对话、多模态、文生图、图生图、文字转语音`TTS`、Embedding），并且已经通过`OpenAI-SDK`测试，可以正常使用。
 
 | 类型         | 系列        | 模型                                                                                                 | 普通推理 | 流式推理 | FunctionCall |
 |------------|-----------|----------------------------------------------------------------------------------------------------|------|------|--------------|
@@ -591,3 +591,7 @@ response.stream_to_file(speech_file_path)
 ## End
 
 ------
+
+本小节罗列了可以本地部署的开源大模型 API List，如果您自己有自己的GPU计算资源，就可以部署自己本地化的模型服务，不依赖于线上的大模型API接口。在`zlai`中在线模型与本地模型使用方式完全一致，您可以根据需要选择使用。
+
+**Tips**: *其他方法如`Message`推理，模型输出数据类型、输出结果的解析都与前面线上调用模型的使用方式一致。这里不做更为细致的展开。详细的`Message`管理机制，请[参考](/doc/zlai-message-01.md)*

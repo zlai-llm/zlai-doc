@@ -4,7 +4,7 @@
 
 ## 已经通过测试的模型列表
 
-> [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)支持部署以下模型（对话、多模态、文生图、图生图、文字转语音`TTS`、Embedding），并且已经通过`OpenAI-SDK`测试，可以正常使用。
+> [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)支持部署以下模型（[对话](llm/zlai-llm-openai-api?id=chat-completion)、[Function Call](llm/zlai-llm-openai-api?id=function-call)、[多模态](llm/zlai-llm-openai-api?id=多模态模型)、[文生图](llm/zlai-llm-openai-api?id=image-generate)、[图生图](llm/zlai-llm-openai-api?id=image-edit)、[文字转语音`TTS`](llm/zlai-llm-openai-api?id=audio)、[Embedding](llm/zlai-llm-openai-api?id=embedding)），并且已经通过`OpenAI-SDK`测试，可以正常使用。
 
 | 类型         | 系列        | 模型                                                                                                 | 普通推理 | 流式推理 | FunctionCall |
 |------------|-----------|----------------------------------------------------------------------------------------------------|------|------|--------------|
@@ -534,31 +534,6 @@ respose = client.images.edit(
     </div>
 </div>
 
-## Embedding
-
-### Text Embedding
-
-> 文本嵌入模型`Embedding`：将文本转换为向量。
-
-```python
-from openai import OpenAI
-
-client = OpenAI(api_key="EMPTY", base_url="http://localhost:8000")
-
-response = client.embeddings.create(input=["你好"], model="bge-m3")
-print(len(response.data[0].embedding))
-print(response.usage)
-print(response.data[0].embedding[:5])
-```
-
-*输出*
-
-```text
-1024
-Usage(prompt_tokens=0, total_tokens=2)
-[-0.037132877856492996, 0.006196103058755398, -0.06525908410549164, -0.02504667080938816, -0.016926351934671402]
-```
-
 ## Audio
 
 > 文字转语音 `TTS(text to speech)`
@@ -587,6 +562,31 @@ response.stream_to_file(speech_file_path)
 <audio controls>
   <source src="audio/audio.wav" type="audio/mpeg">
 </audio>
+
+## Embedding
+
+### Text Embedding
+
+> 文本嵌入模型`Embedding`：将文本转换为向量。
+
+```python
+from openai import OpenAI
+
+client = OpenAI(api_key="EMPTY", base_url="http://localhost:8000")
+
+response = client.embeddings.create(input=["你好"], model="bge-m3")
+print(len(response.data[0].embedding))
+print(response.usage)
+print(response.data[0].embedding[:5])
+```
+
+*输出*
+
+```text
+1024
+Usage(prompt_tokens=0, total_tokens=2)
+[-0.037132877856492996, 0.006196103058755398, -0.06525908410549164, -0.02504667080938816, -0.016926351934671402]
+```
 
 ## End
 

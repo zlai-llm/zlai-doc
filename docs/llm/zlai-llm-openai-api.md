@@ -131,11 +131,9 @@ completion = client.chat.completions.create(
     stream=True
 )
 
-answer = ""
 for chunk in completion:
     content = chunk.choices[0].delta.content
-    answer += content
-    print(answer)
+    print(content, flush=True, end='')
 ```
 
 *输出*
@@ -353,8 +351,9 @@ The current Celsius temperature in San Francisco is 15 degrees.
 from openai import OpenAI
 from zlai.types.messages import ImageMessage, UserMessage, AssistantMessage
 
+url = "https://pic2.zhimg.com/v2-70ea697c0edec518b9d513a49228e489_b.jpg"
 messages = [
-    ImageMessage(content="解析图片中的文字").add_image(url="https://pic2.zhimg.com/v2-70ea697c0edec518b9d513a49228e489_b.jpg"),
+    ImageMessage(content="解析图片中的文字", images_url=[url]),
 ]
 messages = [message.model_dump() for message in messages]
 

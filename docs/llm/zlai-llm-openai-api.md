@@ -17,6 +17,7 @@
 | 多模态        | GLM4      | [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)                                                | ✔️   | ✔️   | ✔️           |
 | 多模态        | MiniCPM   | [MiniCPM-V-2_6](https://huggingface.co/openbmb/MiniCPM-V-2_6)                                      | ✔️   | ✔️   | ✔️           |
 | 文生图        | Kolors    | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                            | ✔️   | ❌    | ❌            |
+| 文生图        | FLUX      | [FLUX.1-dev](https://hf-mirror.com/black-forest-labs/FLUX.1-dev)                                   | ✔️   | ❌    | ❌            |
 | 图生图        | Kolors    | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                          | ✔️   | ❌    | ❌            |
 | 文字转语音`TTS` | CosyVoice | [CosyVoice-300M](https://huggingface.co/FunAudioLLM/CosyVoice-300M)                                | ✔️   | ❌    | ❌            |
 | Embedding  | BGE       | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                       | ✔️   | ❌    | ❌            |
@@ -472,7 +473,9 @@ for chunk in completion:
 
 ### Image Generate
 
-> 文生图模型`Text2Image`：根据提供的`Prompt`渲染生成图片。
+文生图模型`Text2Image`：根据提供的`Prompt`渲染生成图片。
+
+> Kolors
 
 ```python
 from openai import OpenAI
@@ -494,6 +497,37 @@ trans_bs64_to_image(respose.data[0].b64_json)
 
 <center>
 <img src="img/llm/kolors-diffusers-01.png" width="100%">
+</center>
+
+> FLUX
+
+```python
+from zlai.utils.image import *
+from openai import OpenAI
+
+client = OpenAI(api_key="EMPTY", base_url="http://localhost:8000")
+
+prompt = """
+Envision a mesmerizing space society where floating cities hover among the stars. 
+Imagine a realm where transparent domes encase lush, gravity-defying gardens, 
+and sleek space stations connect like a cosmic web. Picture habitats orbiting gas giants,
+with their surfaces adorned by bioluminescent flora and cascading waterfalls that flow in zero-g. 
+"""
+
+respose = client.images.generate(
+    model="kolors_diffusers",
+    prompt=prompt,
+    size="1792x1024",
+    response_format="b64_json",
+)
+
+trans_bs64_to_image(respose.data[0].b64_json)
+```
+
+*输出*
+
+<center>
+<img src="img/llm/flux.png" width="100%">
 </center>
 
 ### Image Edit

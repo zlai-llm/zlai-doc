@@ -6,21 +6,27 @@
 
 > [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)支持部署以下模型（[对话](llm/zlai-llm-openai-api?id=chat-completion)、[Function Call](llm/zlai-llm-openai-api?id=function-call)、[多模态](llm/zlai-llm-openai-api?id=多模态模型)、[文生图](llm/zlai-llm-openai-api?id=image-generate)、[图生图](llm/zlai-llm-openai-api?id=image-edit)、[文字转语音`TTS`](llm/zlai-llm-openai-api?id=audio)、[Embedding](llm/zlai-llm-openai-api?id=embedding)），并且已经通过`OpenAI-SDK`测试，可以正常使用。
 
-| 类型         | 系列        | 模型                                                                                                 | 普通推理 | 流式推理 | FunctionCall |
-|------------|-----------|----------------------------------------------------------------------------------------------------|------|------|--------------|
-| 对话         | Qwen2     | [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)                             | ✔️   | ✔️   | 暂不支持         |
-| 对话         | Qwen2     | [Qwen2-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2-1.5B-Instruct)                             | ✔️   | ✔️   | 暂不支持         |
-| 对话         | Qwen2     | [Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)                                 | ✔️   | ✔️   | 暂不支持         |
-| 对话         | Qwen2     | [Qwen2-57B-A14B-Instruct-GPTQ-Int4](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct-GPTQ-Int4) | ✔️   | ✔️   | 暂不支持         |
-| 对话         | GLM4      | [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat)                                        | ✔️   | ✔️   | ✔️           |
-| 对话         | GLM4      | [glm-4-9b-chat-1m](https://huggingface.co/THUDM/glm-4-9b-chat-1m)                                  | ✔️   | ✔️   | ✔️           |
-| 多模态        | GLM4      | [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)                                                | ✔️   | ✔️   | ✔️           |
-| 多模态        | MiniCPM   | [MiniCPM-V-2_6](https://huggingface.co/openbmb/MiniCPM-V-2_6)                                      | ✔️   | ✔️   | ✔️           |
-| 文生图        | Kolors    | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                            | ✔️   | ❌    | ❌            |
-| 文生图        | FLUX      | [FLUX.1-dev](https://hf-mirror.com/black-forest-labs/FLUX.1-dev)                                   | ✔️   | ❌    | ❌            |
-| 图生图        | Kolors    | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                          | ✔️   | ❌    | ❌            |
-| 文字转语音`TTS` | CosyVoice | [CosyVoice-300M](https://huggingface.co/FunAudioLLM/CosyVoice-300M)                                | ✔️   | ❌    | ❌            |
-| Embedding  | BGE       | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                       | ✔️   | ❌    | ❌            |
+| 类型             | 系列                | 模型                                                                                                    | 普通推理 | 流式推理 | FunctionCall |
+|----------------|-------------------|-------------------------------------------------------------------------------------------------------|------|------|--------------|
+| 对话             | Qwen2             | [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)                                | ✔️   | ✔️   | 暂不支持         |
+| 对话             | Qwen2             | [Qwen2-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2-1.5B-Instruct)                                | ✔️   | ✔️   | 暂不支持         |
+| 对话             | Qwen2             | [Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)                                    | ✔️   | ✔️   | 暂不支持         |
+| 对话             | Qwen2             | [Qwen2-57B-A14B-Instruct-GPTQ-Int4](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct-GPTQ-Int4)    | ✔️   | ✔️   | 暂不支持         |
+| 对话(Audio)      | Qwen2-Audio       | [wen2-Audio-7B-Instruct](https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct)                         | ✔️   | ❌    | 暂不支持         |
+| 对话             | GLM4              | [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat)                                           | ✔️   | ✔️   | ✔️           |
+| 对话             | GLM4              | [glm-4-9b-chat-1m](https://huggingface.co/THUDM/glm-4-9b-chat-1m)                                     | ✔️   | ✔️   | 暂不支持         |
+| 对话(LongWriter) | GLM4              | [LongWriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b)                                 | ✔️   | ✔️   | 暂不支持         |
+| 对话(LongWriter) | Llama3.1          | [LongWriter-llama3.1-8b](https://huggingface.co/THUDM/LongWriter-llama3.1-8b)                         | ✔️   | ✔️   | 暂不支持         |
+| 对话(code)       | codegeex          | [codegeex4-all-9b](https://huggingface.co/THUDM/codegeex4-all-9b)                                     | ✔️   | ✔️   | 暂不支持         |
+| 对话             | DeepSeek-v2       | [DeepSeek-V2-Lite-Chat](https://huggingface.co/deepseek-ai/DeepSeek-V2-Lite-Chat)                     | ✔️   | ✔️   | 暂不支持         |
+| 对话(code)       | DeepSeek-v2-coder | [DeepSeek-Coder-V2-Lite-Instruct](https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct) | ✔️   | ✔️   | 暂不支持         |
+| 多模态            | GLM4              | [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)                                                   | ✔️   | ✔️   | 暂不支持         |
+| 多模态            | MiniCPM           | [MiniCPM-V-2_6](https://huggingface.co/openbmb/MiniCPM-V-2_6)                                         | ✔️   | ✔️   | 暂不支持         |
+| 文生图            | Kolors            | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                               | ✔️   | ❌    | ❌            |
+| 文生图            | FLUX              | [FLUX.1-dev](https://hf-mirror.com/black-forest-labs/FLUX.1-dev)                                      | ✔️   | ❌    | ❌            |
+| 图生图            | Kolors            | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                             | ✔️   | ❌    | ❌            |
+| 文字转语音`TTS`     | CosyVoice         | [CosyVoice-300M](https://huggingface.co/FunAudioLLM/CosyVoice-300M)                                   | ✔️   | ❌    | ❌            |
+| Embedding      | BGE               | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                          | ✔️   | ❌    | ❌            |
 
 ## 部署方式
 
@@ -45,18 +51,10 @@ zlai_models --config_path "./models_config.yml" --reload=0 --port=8000 --host "0
 
 ```yaml
 models_config:
-  - model_name: Qwen2-0.5B-Instruct                      # 模型名称
+  Qwen2-0.5B-Instruct:                                   # 模型名称
     model_path: /home/models/Qwen/Qwen2-0.5B-Instruct    # 模型文件路径
-    model_type: completion                               # 模型类型，目前支持`completion`、`embedding`
-    load_method: load_qwen2                              # 加载模型方法，目前支持`load_qwen2`、`load_glm4`
-    max_memory:                                          # 模型最大显存
-      0: "2GB"
-  - model_name: Qwen2-1.5B-Instruct
+  Qwen2-1.5B-Instruct:
     model_path: /home/models/Qwen/Qwen2-1.5B-Instruct
-    model_type: completion
-    load_method: load_qwen2
-    max_memory:
-      0: "4GB"
 ```
 
 ## API-Doc
@@ -83,13 +81,22 @@ print(models_list.data)
 [Model(id='Qwen2-0.5B-Instruct', created=None, object='model', owned_by='Open Source'),
  Model(id='Qwen2-1.5B-Instruct', created=None, object='model', owned_by='Open Source'),
  Model(id='Qwen2-7B-Instruct', created=None, object='model', owned_by='Open Source'),
+ Model(id='Qwen2-Audio-7B-Instruct', created=None, object='model', owned_by='Open Source'),
  Model(id='Qwen2-57B-A14B-Instruct-GPTQ-Int4', created=None, object='model', owned_by='Open Source'),
  Model(id='glm-4-9b-chat', created=None, object='model', owned_by='Open Source'),
  Model(id='glm-4-9b-chat-1m', created=None, object='model', owned_by='Open Source'),
  Model(id='glm-4v-9b', created=None, object='model', owned_by='Open Source'),
- Model(id='bge-m3', created=None, object='model', owned_by='Open Source'),
- Model(id='kolors-diffusers', created=None, object='model', owned_by='Open Source'),
- Model(id='mini_cpm-v2_6', created=None, object='model', owned_by='Open Source')]
+ Model(id='LongWriter-glm4-9b', created=None, object='model', owned_by='Open Source'),
+ Model(id='LongWriter-llama3.1-8b', created=None, object='model', owned_by='Open Source'),
+ Model(id='MiniCPM-V-2_6', created=None, object='model', owned_by='Open Source'),
+ Model(id='DeepSeek-V2-Lite-Chat', created=None, object='model', owned_by='Open Source'),
+ Model(id='DeepSeek-Coder-V2-Lite-Instruct', created=None, object='model', owned_by='Open Source'),
+ Model(id='codegeex4-all-9b', created=None, object='model', owned_by='Open Source'),
+ Model(id='Kolors-diffusers', created=None, object='model', owned_by='Open Source'),
+ Model(id='Kolors-image2image', created=None, object='model', owned_by='Open Source'),
+ Model(id='FLUX.1-dev', created=None, object='model', owned_by='Open Source'),
+ Model(id='CosyVoice-300M-SFT', created=None, object='model', owned_by='Open Source'),
+ Model(id='bge-m3', created=None, object='model', owned_by='Open Source')]
 ```
 
 ## Chat Completion
@@ -569,9 +576,38 @@ respose = client.images.edit(
 
 ## Audio
 
-> 文字转语音 `TTS(text to speech)`
+### 音频对话
+
+#### Qwen2-Audio
+
+```python
+from openai import OpenAI
+from zlai.types.messages import AudioMessage
+
+client = OpenAI(api_key="EMPTY", base_url="http://localhost:8000")
+url = "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-Audio/audio/translate_to_chinese.wav"
+messages = [
+    AudioMessage(content="语音中说了什么？", audios_url=[url]).to_message()
+]
+
+completion = client.chat.completions.create(
+    model="Qwen2-Audio-7B-Instruct",
+    messages=messages,
+)
+print(completion.choices[0].message.content)
+```
+
+*输出*
+
+```text
+每个人都希望被欣赏，所以如果你欣赏某人，不要把它保密。
+```
 
 ### TTS
+
+> 文字转语音 `TTS(text to speech)`
+
+#### CosyVoice
 
 > `voice`: 音色有`['中文女', '中文男', '日语男', '粤语女', '英文女', '英文男', '韩语女']`
 

@@ -5,6 +5,7 @@
   * [大模型调用的便捷方法](llm/zlai-llm-02.md)
   * [大模型参数理论解析](llm/zlai-llm-04.md)
   * [开源大模型部署(new)](llm/zlai-llm-openai-api)
+  * [本地部署模型缓存管理](llm/zlai-llm-openai-cache)
 * **Agent**
   * [ZLAI-Agent架构介绍](agent/zlai-agent-01.md)
   * [ZLAI-ToolsAgent](agent/zlai-agent-tools.md)

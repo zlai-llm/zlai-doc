@@ -4,7 +4,7 @@
 
 ```python
 from zlai.models.cahce import ModelCache
-model_cache = ModelCache(base_url="http://192.168.98.240:8000")
+model_cache = ModelCache(base_url="http://localhost:8000")
 ```
 
 ## 查看GPU内存占用

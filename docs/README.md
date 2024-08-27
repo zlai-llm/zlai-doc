@@ -35,6 +35,39 @@
 
 在该文档的介绍中，您将详细了解大模型开发的方方面面，包含理论、实验、案例，相信您在后续的阅读中会有更多的收获。
 
+> 展示
+
+<details>
+    <summary>图文对话</summary>
+        <center><img src="./img/agent/agent_chat_1.png" width="680px"></center>
+        <center><img src="./img/agent/agent_chat_2.png" width="680px"></center>
+        <center><img src="./img/agent/agent_chat_3.png" width="680px"></center>
+        <center><img src="./img/agent/agent_chat_4.png" width="680px"></center>
+</details>
+<details>
+    <summary>基金问答</summary>
+        <center><img src="./img/agent/agent_fund_1.png" width="680px"></center>
+        <center><img src="./img/agent/agent_fund_2.png" width="680px"></center>
+        <center><img src="./img/agent/agent_fund_3.png" width="680px"></center>
+        <center><img src="./img/agent/agent_fund_4.png" width="680px"></center>
+        <center><img src="./img/agent/agent_fund_5.png" width="680px"></center>
+        <center><img src="./img/agent/agent_fund_6.png" width="680px"></center>
+        <center><img src="./img/agent/agent_fund_7.png" width="680px"></center>
+</details>
+<details>
+    <summary>统计作图</summary>
+        <center><img src="./img/agent/agent_chart_1.png" width="680px"></center>
+        <center><img src="./img/agent/agent_chart_2.png" width="680px"></center>
+        <center><img src="./img/agent/agent_chart_3.png" width="680px"></center>
+        <center><img src="./img/agent/agent_chart_4.png" width="680px"></center>
+        <center><img src="./img/agent/agent_chart_5.png" width="680px"></center>
+</details>
+<details>
+    <summary>文本转图谱</summary>
+        <center><img src="./img/agent/text_graph_2.png" width="680px"></center>
+        <center><img src="./img/agent/text_graph_1.png" width="680px"></center>
+</details>
+
 > 安装
 
 ```bash

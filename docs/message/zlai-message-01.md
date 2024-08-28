@@ -20,7 +20,7 @@
 > 调用方式
 
 ```python
-from zlai.schema import (
+from zlai.types.messages import (
     Message,
     SystemMessage,
     UserMessage,
@@ -36,7 +36,7 @@ from zlai.schema import (
 > `SystemMessage`用于指定大模型的角色，`role="system"`已经被内置，你只需要指定该类的`content`即可。下面是一个示例：
 
 ```python
-from zlai.schema import SystemMessage
+from zlai.types.messages import SystemMessage
 
 system_message = SystemMessage(content="you are a helpful assistant.")
 print(system_message)
@@ -55,9 +55,9 @@ role='system' content='you are a helpful assistant.'
 **不加`SystemMessage`**
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.llms import Zhipu, GLM4FlashGenerateConfig
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4FlashGenerateConfig())
 completion = llm.generate(query="76-8=")
 
 print(completion.choices[0].message.content)
@@ -72,15 +72,15 @@ print(completion.choices[0].message.content)
 **加入`SystemMessage`**
 
 ```python
-from zlai.schema import SystemMessage, UserMessage
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
+from zlai.types.messages import SystemMessage, UserMessage
+from zlai.llms import Zhipu, GLM4FlashGenerateConfig
 
 messages = [
     SystemMessage(content="你是一个计算器。请直接输出计算后的结果，不要输出其他内容。"),
 ]
 messages.append(UserMessage(content="76-8="))
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4FlashGenerateConfig())
 completion = llm.generate(messages=messages)
 print(completion.choices[0].message.content)
 ```
@@ -98,7 +98,7 @@ print(completion.choices[0].message.content)
 > `UserMessage`用于指定用户提出的问题，`role="user"`已经被内置，你只需要指定该类的`content`即可。下面是一个示例：
 
 ```python
-from zlai.schema import UserMessage
+from zlai.types.messages import UserMessage
 
 user_message = UserMessage(content="76-8=")
 print(user_message)
@@ -115,7 +115,7 @@ role='user' content='76-8='
 > `AssistantMessage`用于指定用户提出的问题，`role="assistant"`已经被内置，你只需要指定该类的`content`即可。下面是一个示例：
 
 ```python
-from zlai.schema import AssistantMessage
+from zlai.types.messages import AssistantMessage
 
 assistant_message = AssistantMessage(content="76-8 的计算结果是 68。")
 print(assistant_message)
@@ -134,8 +134,8 @@ content='76-8 的计算结果是 68。', role='assistant'
 > 示例代码
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
-from zlai.schema import SystemMessage, UserMessage, AssistantMessage
+from zlai.llms import Zhipu, GLM4FlashGenerateConfig
+from zlai.types.messages import SystemMessage, UserMessage, AssistantMessage
 
 messages = [
     SystemMessage(content="你是一个记账机器人。"),
@@ -153,7 +153,7 @@ messages = [
 
 messages.append(UserMessage(content="请告诉我最近我看电影花了多少钱？"))
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4FlashGenerateConfig())
 completion = llm.generate(messages=messages)
 
 print(completion.choices[0].message.content)
@@ -194,15 +194,15 @@ print(completion.choices[0].message.content)
 > 示例代码
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
-from zlai.schema import SystemMessage, UserMessage
+from zlai.llms import Zhipu, GLM4FlashGenerateConfig
+from zlai.types.messages import SystemMessage, UserMessage
 
 messages = [
     SystemMessage(content="你是一个实体识别机器人，你需要提取后续提供给你文本中涉及到的作物，并输出为List，注意仅输出List信息，不输出其他内容。"),
     UserMessage(content="农民们关注的是小麦和水稻的收成情况。"),
 ]
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4FlashGenerateConfig())
 completion = llm.generate(messages=messages)
 
 print(completion.choices[0].message.content)
@@ -224,8 +224,8 @@ print(completion.choices[0].message.content)
 > 示例代码
 
 ```python
-from zlai.llms import Zhipu, ZhipuGLM3Turbo
-from zlai.schema import SystemMessage, UserMessage, AssistantMessage
+from zlai.llms import Zhipu, GLM4FlashGenerateConfig
+from zlai.types.messages import SystemMessage, UserMessage, AssistantMessage
 
 messages = [
     SystemMessage(content="你是一个实体识别机器人，你需要提取后续提供给你文本中涉及到的作物，并输出为List，注意仅输出List信息，不输出其他内容。")
@@ -243,7 +243,7 @@ few_shot = [
 messages.extend(few_shot)
 messages.append(UserMessage(content="农民们关注的是小麦和水稻的收成情况。"))
 
-llm = Zhipu(generate_config=ZhipuGLM3Turbo())
+llm = Zhipu(generate_config=GLM4FlashGenerateConfig())
 completion = llm.generate(messages=messages)
 
 print(completion.choices[0].message.content)
@@ -299,7 +299,7 @@ print(completion.choices[0].message.content)
 ```python
 from zlai.prompt import MessagesPrompt
 from zlai.embedding import Embedding
-from zlai.schema import *
+from zlai.types.messages import *
 
 # 设定系统Message
 system_message = SystemMessage(content="你是一个计算器")

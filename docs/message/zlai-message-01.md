@@ -10,12 +10,17 @@
 
 > `Message`类型
 
-| Message                | 类别   | 备注 |
-|------------------------|------|----|
-| `SystemMessage()`      | 系统消息 |    |
-| `UserMessage()`        | 用户消息 |    |
-| `AssistantMessage()`   | AI消息 |    |
-| `ObservationMessage()` | 观测消息 |    |
+| Message                | 类别        | 备注 |
+|------------------------|-----------|----|
+| `SystemMessage()`      | 系统消息      |    |
+| `UserMessage()`        | 用户消息      |    |
+| `AssistantMessage()`   | AI消息      |    |
+| `ImageMessage()`       | 图片消息      |    |
+| `AudioMessage()`       | 音频消息      |    |
+| `ChartMessage()`       | echarts消息 |    |
+| `TableMessage()`       | 表格消息      |    |
+| `ToolsMessage()`       | 工具执行消息    |    |
+| `ObservationMessage()` | 观测消息      |    |
 
 > 调用方式
 

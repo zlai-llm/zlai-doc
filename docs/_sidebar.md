@@ -22,6 +22,7 @@
   * [其他问答](agent/zlai-agent-10)
 * **Message**
   * [message-消息机制](message/zlai-message-01.md)
+  * [streamlit-message](message/zlai-streamlit-message)
 * **Prompt**
   * [大模型的局限性](prompt/zlai-prompt-01.md)
   * [提示词设计一般思路](prompt/zlai-prompt-02.md)

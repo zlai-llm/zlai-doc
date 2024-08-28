@@ -12,6 +12,7 @@
   * [ZLAI-Charts-Tools](agent/zlai-charts-tools)
   * [公募基金问答](agent/zlai-agent-fund)
   * [天气查询](agent/zlai-agent-02.md)
+  * [LongWrite](agent/zlai-agent-long-write)
   * [RAG增强索引](agent/zlai-agent-rag)
   * [Bing搜索增强问答](agent/zlai-agent-bing)
   * [数据库查询](agent/zlai-agent-03.md)

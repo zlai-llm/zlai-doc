@@ -54,5 +54,7 @@
 * **Parse**
   * [document](parse/zlai-document.md)
   * [parse](parse/zlai-parse-01.md)
+* **Transformers**
+  * [Chat Templates](transformers/chat_templates)
 * **Version**
   * [version](version/version)

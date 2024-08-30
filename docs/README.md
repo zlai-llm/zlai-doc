@@ -22,6 +22,8 @@
 
 </div>
 
+## 介绍
+
 > 这里是ZLAI的项目文档，ZLAI（`再来`）是一个致力于大模型开发的工具箱。
 
 **为什么选择ZLAI?**
@@ -35,37 +37,90 @@
 
 在该文档的介绍中，您将详细了解大模型开发的方方面面，包含理论、实验、案例，相信您在后续的阅读中会有更多的收获。
 
-> 展示
+## 示例
+
+> 图文对话
 
 <details>
-    <summary>图文对话</summary>
-        <center><img src="./img/agent/agent_chat_1.png" width="680px"></center>
-        <center><img src="./img/agent/agent_chat_2.png" width="680px"></center>
-        <center><img src="./img/agent/agent_chat_3.png" width="680px"></center>
-        <center><img src="./img/agent/agent_chat_4.png" width="680px"></center>
+    <summary>展开查看展示视频</summary>
+    <center>
+        <video width="100%" controls>
+          <source src="./video/display-chat-image.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </center>
 </details>
+
+> 基金问答
+
 <details>
-    <summary>基金问答</summary>
-        <center><img src="./img/agent/agent_fund_1.png" width="680px"></center>
-        <center><img src="./img/agent/agent_fund_2.png" width="680px"></center>
-        <center><img src="./img/agent/agent_fund_3.png" width="680px"></center>
-        <center><img src="./img/agent/agent_fund_4.png" width="680px"></center>
-        <center><img src="./img/agent/agent_fund_5.png" width="680px"></center>
-        <center><img src="./img/agent/agent_fund_6.png" width="680px"></center>
-        <center><img src="./img/agent/agent_fund_7.png" width="680px"></center>
+    <summary>展开查看展示视频</summary>
+    <center>
+        <video width="100%" controls>
+          <source src="./video/display-agent-fund.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </center>
 </details>
+
+> 统计作图
+
 <details>
-    <summary>统计作图</summary>
-        <center><img src="./img/agent/agent_chart_1.png" width="680px"></center>
-        <center><img src="./img/agent/agent_chart_2.png" width="680px"></center>
-        <center><img src="./img/agent/agent_chart_3.png" width="680px"></center>
-        <center><img src="./img/agent/agent_chart_4.png" width="680px"></center>
-        <center><img src="./img/agent/agent_chart_5.png" width="680px"></center>
+    <summary>展开查看展示视频</summary>
+    <center>
+        <video width="100%" controls>
+          <source src="./video/display-agent-charts.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </center>
 </details>
+
+> 文本转图谱
+
 <details>
-    <summary>文本转图谱</summary>
-        <center><img src="./img/agent/text_graph_2.png" width="680px"></center>
-        <center><img src="./img/agent/text_graph_1.png" width="680px"></center>
+    <summary>展开查看展示视频</summary>
+    <center>
+        <video width="100%" controls>
+          <source src="./video/display-text-graph.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </center>
+</details>
+
+> 长文本续写（Agent Write）
+
+<details>
+    <summary>展开查看展示视频</summary>
+    <center>
+        <video width="100%" controls>
+          <source src="./video/display-agent-write.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </center>
+</details>
+
+> 语音对话
+
+<details>
+    <summary>展开查看展示视频</summary>
+    <center>
+        <video width="100%" controls>
+          <source src="./video/display-chat-audio.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </center>
+</details>
+
+> Agent问答
+
+<details>
+    <summary>展开查看展示视频</summary>
+    <center>
+        <video width="100%" controls>
+          <source src="./video/display-chat-agent.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </center>
 </details>
 
 > 安装

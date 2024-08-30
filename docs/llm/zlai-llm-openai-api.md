@@ -8,10 +8,10 @@
 
 | 类型             | 系列                | 模型                                                                                                    | 普通推理 | 流式推理 | FunctionCall |
 |----------------|-------------------|-------------------------------------------------------------------------------------------------------|------|------|--------------|
-| 对话             | Qwen2             | [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)                                | ✔️   | ✔️   | 暂不支持         |
-| 对话             | Qwen2             | [Qwen2-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2-1.5B-Instruct)                                | ✔️   | ✔️   | 暂不支持         |
-| 对话             | Qwen2             | [Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)                                    | ✔️   | ✔️   | 暂不支持         |
-| 对话             | Qwen2             | [Qwen2-57B-A14B-Instruct-GPTQ-Int4](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct-GPTQ-Int4)    | ✔️   | ✔️   | 暂不支持         |
+| 对话             | Qwen2             | [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)                                | ✔️   | ✔️   | ✔️           |
+| 对话             | Qwen2             | [Qwen2-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2-1.5B-Instruct)                                | ✔️   | ✔️   | ✔️           |
+| 对话             | Qwen2             | [Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)                                    | ✔️   | ✔️   | ✔️           |
+| 对话             | Qwen2             | [Qwen2-57B-A14B-Instruct-GPTQ-Int4](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct-GPTQ-Int4)    | ✔️   | ✔️   | ✔️           |
 | 对话(Audio)      | Qwen2-Audio       | [wen2-Audio-7B-Instruct](https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct)                         | ✔️   | ❌    | 暂不支持         |
 | 对话             | GLM4              | [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat)                                           | ✔️   | ✔️   | ✔️           |
 | 对话             | GLM4              | [glm-4-9b-chat-1m](https://huggingface.co/THUDM/glm-4-9b-chat-1m)                                     | ✔️   | ✔️   | 暂不支持         |

@@ -6,27 +6,114 @@
 
 > [![Python package](https://img.shields.io/pypi/v/zlai)](https://pypi.org/project/zlai/)支持部署以下模型（[对话](llm/zlai-llm-openai-api?id=chat-completion)、[Function Call](llm/zlai-llm-openai-api?id=function-call)、[多模态](llm/zlai-llm-openai-api?id=多模态模型)、[文生图](llm/zlai-llm-openai-api?id=image-generate)、[图生图](llm/zlai-llm-openai-api?id=image-edit)、[文字转语音`TTS`](llm/zlai-llm-openai-api?id=audio)、[Embedding](llm/zlai-llm-openai-api?id=embedding)），并且已经通过`OpenAI-SDK`测试，可以正常使用。
 
-| 类型             | 系列                | 模型                                                                                                    | 普通推理 | 流式推理 | FunctionCall |
-|----------------|-------------------|-------------------------------------------------------------------------------------------------------|------|------|--------------|
-| 对话             | Qwen2             | [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)                                | ✔️   | ✔️   | ✔️           |
-| 对话             | Qwen2             | [Qwen2-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2-1.5B-Instruct)                                | ✔️   | ✔️   | ✔️           |
-| 对话             | Qwen2             | [Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct)                                    | ✔️   | ✔️   | ✔️           |
-| 对话             | Qwen2             | [Qwen2-57B-A14B-Instruct-GPTQ-Int4](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct-GPTQ-Int4)    | ✔️   | ✔️   | ✔️           |
-| 对话(Audio)      | Qwen2-Audio       | [wen2-Audio-7B-Instruct](https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct)                         | ✔️   | ❌    | 暂不支持         |
-| 对话             | GLM4              | [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat)                                           | ✔️   | ✔️   | ✔️           |
-| 对话             | GLM4              | [glm-4-9b-chat-1m](https://huggingface.co/THUDM/glm-4-9b-chat-1m)                                     | ✔️   | ✔️   | 暂不支持         |
-| 对话(LongWriter) | GLM4              | [LongWriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b)                                 | ✔️   | ✔️   | 暂不支持         |
-| 对话(LongWriter) | Llama3.1          | [LongWriter-llama3.1-8b](https://huggingface.co/THUDM/LongWriter-llama3.1-8b)                         | ✔️   | ✔️   | 暂不支持         |
-| 对话(code)       | codegeex          | [codegeex4-all-9b](https://huggingface.co/THUDM/codegeex4-all-9b)                                     | ✔️   | ✔️   | 暂不支持         |
-| 对话             | DeepSeek-v2       | [DeepSeek-V2-Lite-Chat](https://huggingface.co/deepseek-ai/DeepSeek-V2-Lite-Chat)                     | ✔️   | ✔️   | 暂不支持         |
-| 对话(code)       | DeepSeek-v2-coder | [DeepSeek-Coder-V2-Lite-Instruct](https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct) | ✔️   | ✔️   | 暂不支持         |
-| 多模态            | GLM4              | [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)                                                   | ✔️   | ✔️   | 暂不支持         |
-| 多模态            | MiniCPM           | [MiniCPM-V-2_6](https://huggingface.co/openbmb/MiniCPM-V-2_6)                                         | ✔️   | ✔️   | 暂不支持         |
-| 文生图            | Kolors            | [Kolors-diffusers](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                               | ✔️   | ❌    | ❌            |
-| 文生图            | FLUX              | [FLUX.1-dev](https://hf-mirror.com/black-forest-labs/FLUX.1-dev)                                      | ✔️   | ❌    | ❌            |
-| 图生图            | Kolors            | [Kolors-image2image](https://huggingface.co/Kwai-Kolors/Kolors-diffusers)                             | ✔️   | ❌    | ❌            |
-| 文字转语音`TTS`     | CosyVoice         | [CosyVoice-300M](https://huggingface.co/FunAudioLLM/CosyVoice-300M)                                   | ✔️   | ❌    | ❌            |
-| Embedding      | BGE               | [bge-m3](https://huggingface.co/BAAI/bge-m3)                                                          | ✔️   | ❌    | ❌            |
+<details>
+    <summary>Qwen2 系列</summary>
+
+| 类型           | 模型                                | 普通推理 | 流式推理 | FunctionCall |
+|--------------|-----------------------------------|------|------|--------------|
+| 对话           | Qwen2-0.5B-Instruct               | ✔️   | ✔️   | ✔️           |
+| 对话           | Qwen2-1.5B-Instruct               | ✔️   | ✔️   | ✔️           |
+| 对话           | Qwen2-7B-Instruct                 | ✔️   | ✔️   | ✔️           |
+| 对话           | Qwen2-57B-A14B-Instruct-GPTQ-Int4 | ✔️   | ✔️   | ✔️           |
+| 多模态对话(Audio) | qwen2-VL-2B-Instruct              | ✔️   | ✔️   | 暂不支持         |
+| 多模态对话(Audio) | qwen2-VL-7B-Instruct              | ✔️   | ✔️   | 暂不支持         |
+| 音频对话(Audio)  | qwen2-Audio-7B-Instruct           | ✔️   | ❌    | 暂不支持         |
+
+</details>
+
+<details>
+    <summary>Qwen2.5 系列</summary>
+
+| 类型       | 模型                          | 普通推理 | 流式推理 | FunctionCall |
+|----------|-----------------------------|------|------|--------------|
+| 对话       | Qwen2-0.5B-Instruct         | ✔️   | ✔️   | ✔️           |
+| 对话       | Qwen2.5-1.5B-Instruct       | ✔️   | ✔️   | ✔️           |
+| 对话       | Qwen2.5-3B-Instruct         | ✔️   | ✔️   | ✔️           |
+| 对话       | Qwen2.5-7B-Instruct         | ✔️   | ✔️   | ✔️           |
+| 对话       | Qwen2.5-14B-Instruct        | ✔️   | ✔️   | ✔️           |
+| 对话       | Qwen2.5-32B-Instruct        | ✔️   | ✔️   | ✔️           |
+| 对话       | Qwen2.5-72B-Instruct        | ✔️   | ✔️   | ✔️           |
+| 对话(代码生成) | Qwen2.5-Coder-1.5B-Instruct | ✔️   | ✔️   | ✔️           |
+| 对话(代码生成) | Qwen2.5-Coder-7B-Instruct   | ✔️   | ✔️   | ✔️           |
+
+</details>
+
+<details>
+    <summary>GLM4 系列</summary>
+
+| 类型             | 模型                     | 普通推理 | 流式推理 | FunctionCall |
+|----------------|------------------------|------|------|--------------|
+| 对话             | glm-4-9b-chat          | ✔️   | ✔️   | ✔️           |
+| 对话             | glm-4-9b-chat-1m       | ✔️   | ✔️   | 暂不支持         |
+| 对话(LongWriter) | LongWriter-glm4-9b     | ✔️   | ✔️   | 暂不支持         |
+| 对话(LongWriter) | LongWriter-llama3.1-8b | ✔️   | ✔️   | 暂不支持         |
+| 对话(LongCite)   | LongCite-glm4-9b       | ✔️   | ✔️   | 暂不支持         |
+| 对话(LongCite)   | LongCite-llama3.1-8b   | ✔️   | ✔️   | 暂不支持         |
+| 对话(code)       | codegeex4-all-9b       | ✔️   | ✔️   | 暂不支持         |
+| 多模态            | glm-4v-9b              | ✔️   | ✔️   | 暂不支持         |
+
+</details>
+
+<details>
+    <summary>DeepSeek 系列</summary>
+
+| 类型       | 模型                | 普通推理                            | 流式推理 | FunctionCall |
+|----------|-------------------|---------------------------------|------|--------------|
+| 对话       | DeepSeek-v2       | DeepSeek-V2-Lite-Chat           | ✔️   | ✔️           | 暂不支持         |
+| 对话(code) | DeepSeek-v2-coder | DeepSeek-Coder-V2-Lite-Instruct | ✔️   | ✔️           | 暂不支持         |
+
+</details>
+
+<details>
+    <summary>MiniCPM 系列</summary>
+
+| 类型  | 模型            | 普通推理 | 流式推理 | FunctionCall |
+|-----|---------------|------|------|--------------|
+| 多模态 | MiniCPM-V-2_6 | ✔️   | ✔️   | 暂不支持         |
+| 对话  | MiniCPM3-4B   | ✔️   | ✔️   | ✔️           |
+
+</details>
+
+<details>
+    <summary>Diffusers 系列</summary>
+
+| 类型  | 模型     | 普通推理               | 流式推理 | FunctionCall |
+|-----|--------|--------------------|------|--------------|
+| 文生图 | Kolors | Kolors-diffusers   | ✔️   | ❌            | ❌            |
+| 文生图 | FLUX   | FLUX.1-dev         | ✔️   | ❌            | ❌            |
+| 图生图 | Kolors | Kolors-image2image | ✔️   | ❌            | ❌            |
+
+</details>
+
+<details>
+    <summary>TTS文本转语音系列</summary>
+
+| 类型         | 模型             | 普通推理 | 流式推理 | FunctionCall |
+|------------|----------------|------|------|--------------|
+| 文字转语音`TTS` | CosyVoice-300M | ✔️   | ❌    | ❌            |
+
+</details>
+
+<details>
+    <summary>Embedding 系列</summary>
+
+| 类型        | 模型                 | 普通推理 | 流式推理 | FunctionCall |
+|-----------|--------------------|------|------|--------------|
+| Embedding | bge-m3             | ✔️   | ❌    | ❌            |
+| Embedding | jina-embeddings-v3 | ✔️   | ❌    | ❌            |
+
+</details>
+
+<details>
+    <summary>OCR 系列</summary>
+
+| 类型  | 模型         | 普通推理 | 流式推理 | FunctionCall |
+|-----|------------|------|------|--------------|
+| OCR | GOT-OCR2_0 | ✔️   | ❌    | ❌            |
+
+</details>
+
+
 
 ## 部署方式
 

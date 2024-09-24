@@ -8,7 +8,9 @@
 from zlai.tools import *
 from zlai.schema import SystemMessage
 from zlai.agent import ToolsAgent, Tools
-from zlai.llms import Zhipu, GLM4GenerateConfig
+from zlai.llms import Zhipu
+from zlai.llms.generate_config.api import GLM4GenerateConfig
+# from zlai.llms.generate_config.local import GLM4GenerateConfig
 
 llm = Zhipu(generate_config=GLM4GenerateConfig())
 

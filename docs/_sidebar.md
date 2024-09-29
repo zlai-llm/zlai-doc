@@ -48,13 +48,24 @@
   * [向量数据库ES](embedding/zlai-elasticsearch-01.md)
   * [zlai-es使用方式](embedding/zlai-elasticsearch-02.md)
   * [向量数据库milvus](embedding/milvus.md)
+* **Tools**
+  * [宏观数据](tools/macro.md)
+  * [研报数据](tools/reports.md)
+  * [新闻数据](tools/news.md)
+  * [股票业绩数据](tools/stock_performance)
 * **RAG**
   * [RAG](rag/zlai-rag-01.md)
   * [GraphRAG](rag/graph_rag.md)
 * **Parse**
   * [document](parse/zlai-document.md)
   * [parse](parse/zlai-parse-01.md)
+* **Datasets**
+  * [介绍](dataset/introduce.md)
+  * [quick start](dataset/quick_start)
 * **Transformers**
   * [Chat Templates](transformers/chat_templates)
+  * [Trainer](transformers/trainer)
+* **TRL**
+  * [介绍](trl/introduce.md)
 * **Version**
   * [version](version/version)
